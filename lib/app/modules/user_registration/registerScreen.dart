@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../components/My_textfield.dart';
-import '../components/my_button.dart';
+import '../../widgets/custom_button.dart';
+import '../../widgets/custom_textfield.dart';
 
 class RegisterPage extends StatelessWidget {
    RegisterPage({Key? key}) : super(key: key);
@@ -26,31 +25,31 @@ class RegisterPage extends StatelessWidget {
                 size: 100,),
               const SizedBox(height: 50),
               //username textfield
-              MyTextField(
+              CustomTextfield(
                 controller: usernameController,
                 hintText: "Name",
                 obscureText: false,
               ),
 
               const SizedBox(height: 25),
-              MyTextField(
+              CustomTextfield(
                 controller: usernameController,
                 hintText: "Email Id",
                 obscureText: false,
               ),
 
               const SizedBox(height: 25),
-              MyTextField(
+              CustomTextfield(
                 controller: usernameController,
-                hintText: "Confirm Password",
+                hintText: " Password",
                 obscureText: false,
               ),
 
               const SizedBox(height: 25),
               //password Textfield
-              MyTextField(
+              CustomTextfield(
                 controller: passwordController,
-                hintText: "Password",
+                hintText: "Confirm Password",
                 obscureText:true ,
               ),
 
@@ -90,10 +89,10 @@ class RegisterPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  MyButton(
+                  CustomButton(
                     onTap:signUserIn, button_text: 'SignUp' ,
                   ),
-                  MyButton(
+                  CustomButton(
                     onTap:signUserIn, button_text: 'Clear' ,
                   ),
                 ],

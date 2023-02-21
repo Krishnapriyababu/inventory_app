@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_app/Screens/registerScreen.dart';
+import 'package:get/get.dart';
+import 'package:inventory_app/app/modules/splash_page/splash_screen.dart';
+import 'package:inventory_app/app/modules/user_registration/registerScreen.dart';
+import 'package:sizer/sizer.dart';
 
 import 'Screens/homePage.dart';
-import 'Screens/login_page.dart';
+import 'app/modules/user_login/login_page.dart';
 
 void main(){
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
@@ -13,9 +17,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home:const HomePage(),
-    );
+    return    Sizer(
+        builder: (context, orientation, deviceType)
+    {
+      return      GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        home:SplashScreen(),
+      );
+    });
+
+
+
+
   }
 }
