@@ -8,21 +8,40 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:inventory_app/app/modules/bottom_navbar/bottom_nav_page.dart';
 import 'package:inventory_app/core/utils/constants.dart';
 
+import '../../../core/utils/user_type.dart';
 import '../../data/models/user_details_model.dart';
 import '../../global_controller/firebasecontroller.dart';
 
 class LoginController extends GetxController {
   late TextEditingController userEmailController;
   late TextEditingController passwordController;
+  late UserType userType;
+  RxString selectedUserType = "".obs;
   final FirebaseController _firebaseController = Get.put(FirebaseController());
 
   @override
   void onInit() {
     userEmailController = TextEditingController();
     passwordController = TextEditingController();
+    userType = UserType.nil;
     // log("width...${AppLayout.getScreenWidth()}");
     // log("applayoutwidth...${AppLayout.getWidth(100)}");
     super.onInit();
+  }
+
+  void userTypeRadio(value){
+    userType = value;
+
+    if (UserType.Supervisor == userType) {
+      selectedUserType.value = "Supervisor";
+    }
+    else if((UserType.Employee == userType)){
+      selectedUserType.value = "Employee";
+    }
+    else{
+      selectedUserType.value = "";
+    }
+    log("usertype .....  ${selectedUserType.value}");
   }
 
   void loginUser() {
@@ -68,8 +87,7 @@ class LoginController extends GetxController {
                 userName: user.displayName!,
                 mailId: user.email!,
                 password: "",
-                phoneNumber: "",
-                sms: true);
+                sms: true, userType: selectedUserType.value);
 
             socialMediaSignIn(smsUserData);
           }

@@ -5,15 +5,15 @@ class UserData {
   String userName;
   String mailId;
   String password;
-  String phoneNumber;
   bool sms;
+  String userType;
 
   UserData(
       {required this.id,
       required this.userName,
       required this.mailId,
       required this.password,
-      required this.phoneNumber,
+      required this.userType,
       required this.sms});
 
   Map<String, dynamic> toMap() {
@@ -22,7 +22,7 @@ class UserData {
       'userName': userName,
       'mailId': mailId,
       'password': password,
-      'phoneNumber': phoneNumber,
+      'userType':userType,
       'sms': sms
     };
   }
@@ -33,6 +33,6 @@ class UserData {
         userName = documentSnapshot["userName"],
         mailId = documentSnapshot["mailId"],
         password = documentSnapshot["password"],
-        phoneNumber = documentSnapshot["phoneNumber"],
+        userType = documentSnapshot["userType"],
         sms = documentSnapshot["sms"];
 }

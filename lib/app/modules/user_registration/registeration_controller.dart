@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:inventory_app/core/utils/constants.dart';
+import 'package:inventory_app/core/utils/user_type.dart';
 import '../../data/models/user_details_model.dart';
 import '../../global_controller/firebasecontroller.dart';
 
@@ -11,8 +14,9 @@ class RegistrationController extends GetxController {
   late TextEditingController emailId;
   late TextEditingController password;
   late TextEditingController confirmPassword;
-  late TextEditingController phoneNumber;
   late TextEditingController otpField;
+  late UserType userType;
+  RxString selectedUserType = "".obs;
 
   final FirebaseController _firebaseController = Get.put(FirebaseController());
 
@@ -22,8 +26,8 @@ class RegistrationController extends GetxController {
     emailId = TextEditingController();
     password = TextEditingController();
     confirmPassword = TextEditingController();
-    phoneNumber = TextEditingController();
     otpField = TextEditingController();
+    userType = UserType.nil;
 
 
     super.onInit();
@@ -37,6 +41,21 @@ class RegistrationController extends GetxController {
     }
     regformkey.currentState!.save();
     return isValid;
+  }
+
+  void userTypeRadio(value){
+    userType = value;
+
+    if (UserType.Supervisor == userType) {
+      selectedUserType.value = "Supervisor";
+    }
+    else if((UserType.Employee == userType)){
+      selectedUserType.value = "Employee";
+    }
+    else{
+      selectedUserType.value = "";
+    }
+    log("usertype .....  ${selectedUserType.value}");
   }
 
 //password validation
@@ -57,12 +76,15 @@ class RegistrationController extends GetxController {
   }
 
 
-  void registerUser(BuildContext context) {
+
+
+  void registerUser() {
     if(_firebaseController.netWorkStatus == false){
       Constants.customToast("Please turn on your internet");
     }else{
+      Constants.customToast("registercalled");
       _firebaseController.register(
-          userName.text, emailId.text, password.text, phoneNumber.text);
+          userName.text, emailId.text, password.text,selectedUserType.value);
     }
 
   }

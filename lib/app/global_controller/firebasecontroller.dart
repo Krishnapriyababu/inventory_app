@@ -118,13 +118,14 @@ class FirebaseController extends GetxController {
   }
 
   void register(
-      String username, String email, password, String phoneNumber) async {
+      String username, String email, password, String selectedUserType) async {
 
 
     if (netWorkStatus == false) {
       Constants.customToast("Please turn on your internet");
     } else {
       try {
+        Constants.customToast("inside registertry");
         CollectionReference reference =
         FirebaseFirestore.instance.collection("Users");
         await firebaseAuth
@@ -136,8 +137,8 @@ class FirebaseController extends GetxController {
               userName: username,
               mailId: email,
               password: password,
-              phoneNumber: phoneNumber,
-              sms: false);
+              userType: selectedUserType,
+              sms: false, );
           reference
               .doc(value.user?.uid.toString())
               .set(userData.toMap())
@@ -146,9 +147,6 @@ class FirebaseController extends GetxController {
             log("Inside registermethod on error catch $onError"));
       } catch (firebaseAuthException) {}
     }
-
-
-
 
 
   }

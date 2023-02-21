@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class CustomButton extends StatelessWidget {
   final String button_text;
@@ -10,8 +11,8 @@ class CustomButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding:const EdgeInsets.all(25),
-        margin: const EdgeInsets.symmetric(horizontal: 25),
+        height: 5.h,
+          width: 10.h,
         decoration: BoxDecoration(
             color: Colors.black,
           borderRadius: BorderRadius.circular(8),
@@ -19,7 +20,7 @@ class CustomButton extends StatelessWidget {
         child: Center(
           child: Text(
             button_text,
-          style: TextStyle(
+          style: const TextStyle(
               color: Colors.white,
             fontWeight: FontWeight.bold,
             fontSize: 16,
