@@ -20,9 +20,9 @@ class MyApp extends StatelessWidget {
     return    Sizer(
         builder: (context, orientation, deviceType)
     {
-      return      GetMaterialApp(
+      return   GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        home:SplashScreen(),
+        home:HomePage(),
       );
     });
 
