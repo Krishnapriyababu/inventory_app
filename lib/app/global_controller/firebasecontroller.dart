@@ -142,7 +142,7 @@ class FirebaseController extends GetxController {
           reference
               .doc(value.user?.uid.toString())
               .set(userData.toMap())
-              .then((value) => Get.offAll(const BottomNavigationPage()));
+              .then((value) => Get.offAll( BottomNavigationPage()));
         }).catchError((onError) =>
             log("Inside registermethod on error catch $onError"));
       } catch (firebaseAuthException) {}
@@ -155,7 +155,7 @@ class FirebaseController extends GetxController {
     try {
       await firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) => Get.to(() => const BottomNavigationPage()))
+          .then((value) => Get.to(() =>  BottomNavigationPage()))
           .catchError((onError) =>
           Get.snackbar("Error while sign in ", onError.message));
     } catch (firebaseAuthException) {}

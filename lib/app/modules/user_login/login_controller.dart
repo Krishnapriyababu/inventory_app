@@ -114,6 +114,6 @@ class LoginController extends GetxController {
     reference
         .doc(smsUserData.id)
         .set(smsUserData.toMap())
-        .then((value) => Get.offAll(const BottomNavigationPage()));
+        .then((value) => Get.offAll( BottomNavigationPage()));
   }
 }

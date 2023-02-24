@@ -52,13 +52,14 @@ class StartState extends State<SplashScreen> {
                   borderRadius: BorderRadius.circular(10),
                   image: const DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage("assets/images/img.png"))),
+                      image: AssetImage("assets/images/splash_image.png"))),
             ),
             const Padding(padding: EdgeInsets.only(top: 20.0)),
             const Padding(padding: EdgeInsets.only(top: 20.0)),
             const SizedBox(
               height: 20,
             ),
+
             // Container(
             //   height: 90,
             //   width:90,
