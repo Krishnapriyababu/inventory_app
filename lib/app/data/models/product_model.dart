@@ -1,9 +1,11 @@
-class ProductModel {
+import 'dart:ffi';
+
+class ProductsModel {
   List<Products>? products;
 
-  ProductModel({this.products});
+  ProductsModel({this.products});
 
-  ProductModel.fromJson(Map<String, dynamic> json) {
+  ProductsModel.fromJson(Map<String, dynamic> json) {
     if (json['products'] != null) {
       products = <Products>[];
       json['products'].forEach((v) {
@@ -29,11 +31,11 @@ class Products {
   String? categoryId;
 
   Products(
-      {this.productId,
-        this.productName,
-        this.productRate,
-        this.productImage,
-        this.categoryId});
+      this.productId,
+      this.productName,
+      this.productRate,
+      this.productImage,
+      this.categoryId);
 
   Products.fromJson(Map<String, dynamic> json) {
     productId = json['product_id'];

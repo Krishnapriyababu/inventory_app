@@ -9,11 +9,12 @@ class DashboardController extends GetxController{
   List<Map<String, dynamic>> categoryList = [];
   final ApiServices _apiServices = ApiServices();
   var data;
+  var localDbCategory = <CategoryModel>[].obs;
   @override
   void onInit() {
     getCategoryDetails();
     getProductsList();
-    getTask();
+    getCategory();
   }
   Future<void> getCategoryDetails() async {
      data = await _apiServices.getCategoryList();
@@ -23,9 +24,14 @@ class DashboardController extends GetxController{
     log("inside getProductsList ");
     await _apiServices.getProductsList();
   }
-  Future<void>  getTask() async {
+  Future<void>  getCategory() async {
     log("inside gettask ");
-    data = await DbHelper.getItems();
-   log("offlinedata${data}");
+    var category = await DbHelper.instance.getCategoryList();
+    for (var element in category) {
+      localDbCategory.add(CategoryModel(element["category_id"], element["category_name"], element["imageurl"]));
+      // log("dbDataaa ....  ${localDbCategory.length}");
+
+    }
+
   }
 }

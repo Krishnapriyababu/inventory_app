@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:sizer/sizer.dart';
-
-import '../../widgets/CategorySquareWidget.dart';
+import '../../../core/utils/Styles.dart';
+import '../../../core/utils/app_layout.dart';
+import '../../widgets/CathegoryItem.dart';
+import '../../widgets/cathegory_divider.dart';
 import 'dashboard_controller.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -16,42 +18,138 @@ class DashboardScreen extends StatelessWidget {
       body: Container(
         width: 100.w,
         height: 100.h,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              colors: [
+                Colors.white,
+                Colors.greenAccent,
+              ],
+              begin: FractionalOffset.bottomCenter,
+              end: FractionalOffset.topCenter,
+              tileMode: TileMode.mirror),
+        ),
         child: ListView(
-            physics: const BouncingScrollPhysics(),
-            children: [
-              Container(
-                  height: 8.h,
-                  width: 100.w,
-                  margin: EdgeInsets.all(2.h),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                          padding:EdgeInsets.all(2.h),
-                          child: Text("Category" ,style: TextStyle(color: Colors.grey,fontSize: 13.sp,fontWeight: FontWeight.w400),)),
-                    ],
-                  )
-              ),
-              Row(
-                children: const [
-                  CategorySquareWidget(itemassetDetail: 'assets/images/splash_image.png', itemTitle: ' \nLive practice',),
-                  CategorySquareWidget(itemassetDetail: 'assets/images/splash_image.png', itemTitle: '   Pending\nassignments',)
+          physics: const BouncingScrollPhysics(),
+          children: [
+            Container(
+              width: 100.w,
+              color: Colors.transparent,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 1.h,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: AppLayout.getHeight(10),
+                        right: AppLayout.getHeight(10)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Inventory Manager",
+                              style: heading5,
+                            ),
+                            SizedBox(
+                              height: AppLayout.getHeight(15),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          width: 70,
+                          height: 70,
+                          margin: EdgeInsets.only(
+                              right: AppLayout.getHeight(20)),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: const DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: AssetImage(
+                                      "assets/images/splash_image.png"))),
+                        )
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: 1.h,
+                        right: 1.h),
+                    child: const CategoryDivider(
+                      title: 'Current Stock :',
+                    ),
+                  ),
+                  SizedBox(
+                    height: AppLayout.getHeight(10),
+                  ),
+                  Container(
+                      height: 8.h,
+                      width: 100.w,
+                      margin: EdgeInsets.all(1.h),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              padding:EdgeInsets.all(2.h),
+                              child: Text("Category" ,style: TextStyle(color: Colors.grey,fontSize: 13.sp,fontWeight: FontWeight.w400),)),
+                        ],
+                      )
+                  ),
+
+                  SizedBox(
+                    height: AppLayout.getHeight(20),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: AppLayout.getHeight(10),
+                        right: AppLayout.getHeight(10)),
+                    child: const CategoryDivider(
+                      title: 'Top Categories :',
+                    ),
+                  ),
+                  SizedBox(
+                    height: AppLayout.getHeight(10),
+                  ),
+                  Container(
+                      height: 56.h,
+                      width: 100.w,
+                      child: GetBuilder<DashboardController>(
+                        builder: (context) {
+                          return Obx(() => ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              physics:
+                              const BouncingScrollPhysics(),
+                              itemCount:
+                              context.localDbCategory.length,
+                              itemBuilder: (context, index) {
+                                return Row(children: [
+                                  CategoryItem(
+                                    category: dashboardController.localDbCategory[index],
+                                  )
+
+                                ]);
+                              }));
+                        },
+                      )
+                  ),
+                  SizedBox(
+                    height: AppLayout.getHeight(10),
+                  ),
                 ],
               ),
-              Row(
-                children: const [
-                  CategorySquareWidget(itemassetDetail: 'assets/images/splash_image.png', itemTitle: ' \nMy players',),
-                  CategorySquareWidget(itemassetDetail: 'assets/images/splash_image.png',  itemTitle: ' \nCourses',)
-                ],
-              )
-
-
-            ]),
-
-      ),
+            ),
+          ],
+        ),
+      )
     );
   }
 }

@@ -17,10 +17,11 @@ class ApiServices extends GetConnect{
     Response response = await _getConnect.get(url);
     if (response.statusCode == 200) {
       final result = response.body;
+      await DbHelper.instance.deleteItem("Category");
       // log("dbdataaaacategory   $result");
       for (var data in result) {
         var datafetched = CategoryModel.fromJson(data);
-        log("dbdataaaa   ${datafetched.categoryName}");
+        log("dbdataaaaCategory   ${datafetched.categoryName}");
         await DbHelper.instance.insertCategory(datafetched);
       }
     } else {
@@ -34,8 +35,8 @@ class ApiServices extends GetConnect{
     //  log("inside getProductsList afterapicall");
     if (response.statusCode == 200) {
       //   log("inside getProductsList staus got");
+      await DbHelper.instance.deleteItem("Products");
       final result = response.body;
-
       for (var data in result["products"]) {
         var datafetched = Products.fromJson(data);
         log("dbdataaaagetProductsList   ${datafetched.productName}");

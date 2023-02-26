@@ -1,5 +1,7 @@
 
 
+import 'dart:developer';
+
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -31,7 +33,7 @@ class DbHelper {
 
   Future _onCreate(Database db, int version) async {
     await db.execute("CREATE TABLE $categoryTable(category_id TEXT PRIMARY KEY, category_name TEXT,imageurl TEXT)");
-    await db.execute("CREATE TABLE $productTable(product_id TEXT PRIMARY KEY , product_name TEXT,product_rate INTEGER, product_image TEXT, category_id TEXT)");
+    await db.execute("CREATE TABLE $productTable(product_id TEXT PRIMARY KEY , product_name TEXT,product_rate TEXT, product_image TEXT, category_id TEXT)");
   }
   Future<int> insertCategory(CategoryModel categoryModel) async {
 
@@ -45,12 +47,35 @@ class DbHelper {
     var res = await db!.insert(productTable, productModel.toJson());
     return res;
   }
-  // Read all items (journals)
-  static Future<Future<List<Map<String, Object?>>>?> getItems() async {
-    final db = await DbHelper._database;
-    return db?.query(categoryTable);
+  Future<List<Map<String, dynamic>>> getCategoryList() async {
+    Database? db = await instance.database;
+    var res = await db!.rawQuery("select * from $categoryTable");
+    return res;
+  }
+  Future<List<Map<String, dynamic>>> getProductListByCategory(String categoryId) async {
+    //   log("offset $offSet");
+    Database? db = await instance.database;
+    log("categoryId $categoryId");
+    //  var res = await db!.rawQuery("select * from $favouritesTableName");
+    //  log("reslength ${res.length}");
+    var res = await db!.rawQuery("select * from $productTable WHERE category_id = '$categoryId'" );
+    log("reslength ${res.length}");
+    return res;
   }
 
 
+  Future<void> deleteItem(String listType) async {
+    Database? db =  await instance.database;
+    try {
+      if(listType == "Products") {
+        db?.delete(productTable);
+      }
+      else {
+        db?.delete(categoryTable);
+      }
+    } catch (err) {
+      log("Something went wrong when deleting an item: $err");
+    }
+  }
 
 }
