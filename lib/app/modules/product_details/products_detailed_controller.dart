@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:inventory_app/Screens/ProductModel.dart';
 
@@ -9,9 +10,10 @@ import '../../data/providers/dbHelper.dart';
 class ProductsController extends GetxController{
   var categoryidcategoryName = "".obs;
   var localDbProducts = <Products>[].obs;
+  late TextEditingController quantity;
   @override
   void onInit() {
-
+    quantity = TextEditingController();
   }
   getProductDetails(String categoryid) async {
     localDbProducts.clear();

@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:inventory_app/Screens/ProductListController.dart';
-import 'package:inventory_app/app/data/models/product_model.dart';
 import 'package:inventory_app/app/modules/product_details/products_detailed_controller.dart';
 import 'package:sizer/sizer.dart';
-import '../../../core/utils/Styles.dart';
 import '../../../core/utils/app_layout.dart';
-import '../../widgets/CathegoryItem.dart';
 import '../../widgets/app_bar_widget.dart';
-import '../../widgets/cathegory_divider.dart';
 import '../../widgets/product_item_detail.dart';
 
 class ProductsDetailedScreen extends StatelessWidget {
@@ -27,8 +21,8 @@ class ProductsDetailedScreen extends StatelessWidget {
         appBar: AppBarWidget(
           height: AppLayout.getHeight(120),
           headline: categoryName,
-          districtName: "details.placeDistrict",
         ),
+
         body: Container(
             width: 100.w,
             height: 100.h,
@@ -46,7 +40,6 @@ class ProductsDetailedScreen extends StatelessWidget {
         child: Container(
             height: 100.h,
             width: 100.w,
-        
             child: GetBuilder<ProductsController>(
               builder: (context) {
                 return Obx(() => ListView.builder(
@@ -59,7 +52,9 @@ class ProductsDetailedScreen extends StatelessWidget {
                       return Row(children: [
                         ProductItemDetail(productdata: _productsController.localDbProducts[index],)
                       ]);
-                    }));
+                    }
+                    )
+                );
               },
             )
         ),

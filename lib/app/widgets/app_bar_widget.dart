@@ -7,14 +7,12 @@ import '../../core/utils/app_layout.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final double height;
-  final String districtName;
   final String headline;
 
   const AppBarWidget({
     Key? key,
     required this.height,
     required this.headline,
-    required this.districtName,
   }) : super(key: key);
 
   @override
@@ -30,14 +28,9 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       height: preferredSize.height + 5,
       width: AppLayout.getScreenWidth(),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-            colors: [
-              Colors.greenAccent,
-             Colors.white,
-            ],
-            begin: FractionalOffset.bottomCenter,
-            end: FractionalOffset.topCenter,
-            tileMode: TileMode.decal),
+        color: Colors.greenAccent,
+        border: Border.all(
+            color: Colors.black54),
       ),
       child: Padding(
         padding: EdgeInsets.all(2.h),
@@ -48,13 +41,13 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               width: AppLayout.getWidth(55),
               height: AppLayout.getHeight(55),
               margin: EdgeInsets.only(
-                  top: 5.h,),
+                top: 5.h,),
               //   margin: const EdgeInsets.only(top: 10,bottom: 700),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: const DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage("assets/images/img.png"))),
+                      image: AssetImage("assets/images/splash_image.png"))),
             ),
             Row(
               children: [

@@ -14,6 +14,8 @@ import 'package:inventory_app/app/modules/user_login/login_page.dart';
 
 import '../../core/utils/constants.dart';
 import '../../core/utils/firebase_constants.dart';
+import '../data/models/firebase_stock_model.dart';
+import '../data/models/product_model.dart';
 import '../data/models/user_details_model.dart';
 
 class FirebaseController extends GetxController {
@@ -277,18 +279,14 @@ class FirebaseController extends GetxController {
       log("favSpotdetails ..${value}");
     }
   }
+  addStockToFirebase(Products productdata, String quantity ) async {
+    var date = DateTime.now().toString();
+    var response = await FirebaseFirestore.instance
+        .collection("Stock").doc();
+    var stockId = response.id;
+    var finalData =  FirebaseStockModel(productName: productdata.productName, productRate: productdata.productRate!, productImage: productdata.productImage, categoryId: productdata.categoryId, dateAdded: date, quantity: quantity, stockId: stockId);
 
-  void getFavDataFromDB() {
-    var collection = FirebaseFirestore.instance
-        .collection('Users')
-        .doc(currentUserId)
-        .collection("Favourites");
-    collection.snapshots().listen((querySnapshot) {
-      for (var doc in querySnapshot.docs) {
-        Map<String, dynamic> data = doc.data();
-        favSpot.add(data['itemId']);
-      }
-    });
-    update();
+    response.set(finalData.toMap()).then((value) => Constants.customToast("data added successfully"));
   }
+
 }
