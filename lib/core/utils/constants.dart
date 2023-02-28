@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class Constants {
+
+abstract class Constants{
   static customToast(String message) {
     Fluttertoast.showToast(
       msg: message,

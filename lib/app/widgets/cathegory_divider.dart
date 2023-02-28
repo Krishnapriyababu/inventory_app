@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../core/utils/AppLayout.dart';
 import '../../core/utils/Styles.dart';
-import '../../core/utils/app_layout.dart';
 
 class CategoryDivider extends StatelessWidget {
   final String title;

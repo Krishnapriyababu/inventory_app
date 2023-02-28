@@ -1,15 +1,10 @@
 import 'dart:developer';
-
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:inventory_app/app/data/models/firebase_stock_model.dart';
+import 'package:inventory_app/app/data/models/user_details_model.dart';
+import 'package:inventory_app/core/utils/constants.dart';
 
-import '../../../core/utils/constants.dart';
-import '../../data/models/firebase_stock_model.dart';
-import '../../data/models/user_details_model.dart';
 import '../../global_controller/firebasecontroller.dart';
-
-
-
 
 class StockDetailsController extends GetxController {
   var stockValue = "".obs;
@@ -29,8 +24,25 @@ class StockDetailsController extends GetxController {
   }
 
   Future<void> getStockDetailFromFirebase() async {
-    // List<FirebaseStockModel> data= await
-    //  log("stockarraylength ..  ${data.length}");
+     await stockfirebaseController.getStockDataFromFireDB();
+    log("STOCKDATA... ${stockfirebaseController.availableStockModel.length} ");
+    for(var i = 0; i < stockfirebaseController.availableStockModel.length; i++){
+      stockDetailFromFirebase.add(stockfirebaseController.availableStockModel[i]);
+      log("STOCKDATA...final ${stockDetailFromFirebase.length},,,,,${stockDetailFromFirebase.value[i].categoryId} ");
+      update();
+    }
+  }
+  removeStockDetails(FirebaseStockModel productdata) async {
+  await stockfirebaseController
+        .removeStockFromDB(productdata);
+  if(stockfirebaseController.deleteStatus.value){
+    stockDetailFromFirebase
+        .removeWhere((value) => value.stockId == productdata.stockId);
+    stockfirebaseController.deleteStatus.value = false;
+    update();
+  }{
+    Constants.customToast("Unable to remove from db");
+  }
   }
 
   Future<void> getUserData() async {
@@ -40,12 +52,7 @@ class StockDetailsController extends GetxController {
     } else {
       userData =
           UserData.fromDocumentSnapshot(documentSnapshot: currentUserDetails);
-      log("STOCKDATA... ${stockfirebaseController.availableStockModel.length} ");
-      for(var i = 0; i < stockfirebaseController.availableStockModel.length; i++){
-        stockDetailFromFirebase.add(stockfirebaseController.availableStockModel[i]);
-        log("STOCKDATA...final ${stockDetailFromFirebase.length},,,,,${stockDetailFromFirebase.value[i].categoryId} ");
-        update();
-      }
+      userType.value = userData.userType!;
       update();
       Constants.customToast(
           " current user details........   ${userData.userType}");

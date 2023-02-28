@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:inventory_app/Screens/ProductListController.dart';
 import 'package:inventory_app/app/data/models/category_model.dart';
 import 'package:sizer/sizer.dart';
+import '../../core/utils/AppLayout.dart';
 import '../../core/utils/Styles.dart';
-import '../../core/utils/app_layout.dart';
 import '../modules/product_details/products_detailed_controller.dart';
 import '../modules/product_details/products_detailed_screen.dart';
 
-
-class CategoryItem extends StatelessWidget {
-   CategoryItem({Key? key, required this.category}) : super(key: key);
-   final CategoryModel category;
-   final ProductsController _productListController = Get.put(ProductsController());
+class CathegoryItem extends StatelessWidget {
+   CathegoryItem({Key? key, required this.category}) : super(key: key);
+  final CategoryModel category;
+  final ProductsController _productListController = Get.put(ProductsController());
 
   @override
   Widget build(BuildContext context) {

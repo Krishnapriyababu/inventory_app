@@ -1,17 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseStockModel {
-  String? productId;
-  String? productName;
-  String? productRate;
-  String? productImage;
-  String? categoryId;
-  String? dateAdded;
-  String? quantity;
-  String? stockId;
+  String productId;
+  String productName;
+  String productRate;
+  String productImage;
+  String categoryId;
+  String dateAdded;
+  String quantity;
+  String stockId;
 
   FirebaseStockModel(
-      {this.productId,
+      {required this.productId,
       required this.productName,
       required this.productRate,
       required this.productImage,
@@ -22,6 +22,7 @@ class FirebaseStockModel {
 
   Map<String, dynamic> toMap() {
     return {
+      'productId':productId,
       'productName': productName,
       'productRate': productRate,
       'productImage': productImage,
@@ -33,8 +34,10 @@ class FirebaseStockModel {
   }
 
   FirebaseStockModel.fromDocumentSnapshot(
-      {required DocumentSnapshot<Object?> documentSnapshot})
-      : productName = documentSnapshot["productName"],
+      {required DocumentSnapshot<Object> documentSnapshot})
+      :
+        productId = documentSnapshot["productId"],
+        productName = documentSnapshot["productName"],
         productRate = documentSnapshot["productRate"],
         productImage = documentSnapshot["productImage"],
         categoryId = documentSnapshot["categoryId"],

@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:inventory_app/Screens/ProductListController.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../core/utils/app_layout.dart';
+import '../../core/utils/AppLayout.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final double height;
+  final String districtName;
   final String headline;
 
   const AppBarWidget({
     Key? key,
     required this.height,
     required this.headline,
+    required this.districtName,
   }) : super(key: key);
 
   @override
@@ -22,13 +23,11 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    ProductListController detailedViewController =
-        Get.put(ProductListController());
     return Container(
       height: preferredSize.height + 5,
       width: AppLayout.getScreenWidth(),
       decoration: BoxDecoration(
-        color: Colors.greenAccent,
+  color: Colors.greenAccent,
         border: Border.all(
             color: Colors.black54),
       ),
@@ -41,13 +40,13 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               width: AppLayout.getWidth(55),
               height: AppLayout.getHeight(55),
               margin: EdgeInsets.only(
-                top: 5.h,),
+                  top: 5.h,),
               //   margin: const EdgeInsets.only(top: 10,bottom: 700),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: const DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage("assets/images/splash_image.png"))),
+                      image: AssetImage("assets/images/img.png"))),
             ),
             Row(
               children: [
@@ -75,3 +74,40 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 }
+
+// Padding(
+// padding: EdgeInsets.all(AppLayout.getHeight(25)),
+// child: Row(
+// mainAxisAlignment: MainAxisAlignment.spaceBetween,
+// children: [
+// Container(
+// width: AppLayout.getWidth(70),
+// height: AppLayout.getHeight(70),
+// margin: const EdgeInsets.only(top: 10,left: 15,right: 15),
+// //   margin: const EdgeInsets.only(top: 10,bottom: 700),
+// decoration: BoxDecoration(
+// borderRadius: BorderRadius.circular(10),
+// image: const DecorationImage(
+// fit: BoxFit.cover,
+// image: AssetImage(
+// "assets/images/letsgo.png"))),
+// ),
+// Container(
+// width: AppLayout.getWidth(150),
+// height: AppLayout.getHeight(50),
+// margin: const EdgeInsets.only(top: 15,left: 10,right: 70),
+// child:
+// Text(
+// details.placeName,
+// style: const TextStyle(
+// fontFamily: "BerkshireSwash",
+// color: blackshade,
+// fontSize: 30,
+// fontWeight: FontWeight.bold),
+// ),
+//
+// ),
+//
+// ],
+// ),
+// ),

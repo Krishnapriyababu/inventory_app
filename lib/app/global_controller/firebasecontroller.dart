@@ -9,13 +9,13 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:inventory_app/app/data/models/firebase_stock_model.dart';
+import 'package:inventory_app/app/data/models/product_model.dart';
 import 'package:inventory_app/app/modules/bottom_navbar/bottom_nav_page.dart';
 import 'package:inventory_app/app/modules/user_login/login_page.dart';
 
 import '../../core/utils/constants.dart';
 import '../../core/utils/firebase_constants.dart';
-import '../data/models/firebase_stock_model.dart';
-import '../data/models/product_model.dart';
 import '../data/models/user_details_model.dart';
 
 class FirebaseController extends GetxController {
@@ -23,14 +23,17 @@ class FirebaseController extends GetxController {
 
   late Rx<User?> firebaseUser;
   var availableStockModel = <FirebaseStockModel>[].obs;
-  var favSpot = <String>[].obs;
   User? user;
   RxBool netWorkStatus = true.obs;
+  var deleteStatus = false.obs;
+
   //this variable 0 = No Internet, 1 = connected to WIFI ,2 = connected to Mobile Data.
   //Instance of Flutter Connectivity
+  late UserData userData;
 
   int connectionType = 0;
   final Connectivity _connectivity = Connectivity();
+
   //Stream to keep listening to network change state
   late StreamSubscription _streamSubscription;
 
@@ -38,7 +41,6 @@ class FirebaseController extends GetxController {
   void onInit() {
     super.onInit();
     _getConnectionType();
-    getStockDataFromFireDB();
     _streamSubscription =
         _connectivity.onConnectivityChanged.listen(_updateState);
     firebaseUser = Rx<User?>(firebaseAuth.currentUser);
@@ -52,9 +54,7 @@ class FirebaseController extends GetxController {
     } else {
       initializeFirebase();
     }
-
   }
-
 
   @override
   void onClose() {
@@ -74,8 +74,6 @@ class FirebaseController extends GetxController {
     return _updateState(connectivityResult!);
   }
 
-
-
   // state update, of network, if you are connected to WIFI connectionType will get set to 1,
   // and update the state to the consumer of that variable.
   _updateState(ConnectivityResult result) {
@@ -92,23 +90,21 @@ class FirebaseController extends GetxController {
         break;
       case ConnectivityResult.none:
         connectionType = 0;
-        netWorkStatus.value =false;
+        netWorkStatus.value = false;
         Constants.customToast("Please connect to internet");
         break;
       default:
-        netWorkStatus.value =false;
+        netWorkStatus.value = false;
         Get.snackbar('Network Error', 'Failed to get Network Status');
         break;
     }
   }
 
   Future<FirebaseApp> initializeFirebase() async {
-
-
     FirebaseApp firebaseApp = await Firebase.initializeApp();
 
     user = FirebaseAuth.instance.currentUser;
-
+    //getUserData(user!.uid);
     return firebaseApp;
   }
 
@@ -117,51 +113,49 @@ class FirebaseController extends GetxController {
       Constants.customToast("inside firecontroller login");
       Get.offAll(() => LoginPage(), transition: Transition.fadeIn);
     } else {
-      Constants.customToast("inside firecontroller bottom");
+      Constants.customToast("insideelse else else firecontroller bottom");
+      Get.offAll(() => BottomNavigationPage(), transition: Transition.fadeIn);
     }
   }
 
   void register(
       String username, String email, password, String selectedUserType) async {
-
-
     if (netWorkStatus == false) {
       Constants.customToast("Please turn on your internet");
     } else {
       try {
         Constants.customToast("inside registertry");
         CollectionReference reference =
-        FirebaseFirestore.instance.collection("Users");
+            FirebaseFirestore.instance.collection("Users");
         await firebaseAuth
             .createUserWithEmailAndPassword(email: email, password: password)
             .then((value) {
           print(value.user?.uid.toString());
           UserData userData = UserData(
-              id: value.user!.uid.toString(),
-              userName: username,
-              mailId: email,
-              password: password,
-              userType: selectedUserType,
-              sms: false, );
+            id: value.user!.uid.toString(),
+            userName: username,
+            mailId: email,
+            password: password,
+            userType: selectedUserType,
+            sms: false,
+          );
           reference
               .doc(value.user?.uid.toString())
               .set(userData.toMap())
-              .then((value) => Get.offAll( BottomNavigationPage()));
+              .then((value) => Get.offAll(BottomNavigationPage()));
         }).catchError((onError) =>
-            log("Inside registermethod on error catch $onError"));
+                log("Inside registermethod on error catch $onError"));
       } catch (firebaseAuthException) {}
     }
-
-
   }
 
   void login(String email, String password) async {
     try {
       await firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) => Get.to(() =>  BottomNavigationPage()))
+          .then((value) {})
           .catchError((onError) =>
-          Get.snackbar("Error while sign in ", onError.message));
+              Get.snackbar("Error while sign in ", onError.message));
     } catch (firebaseAuthException) {}
   }
 
@@ -177,41 +171,6 @@ class FirebaseController extends GetxController {
     } catch (e) {}
   }
 
-  Future<QuerySnapshot<Object?>> getPlaceDataFromFirestore() async {
-    var response = await FirebaseFirestore.instance
-        .collection("Places")
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      return querySnapshot;
-    });
-
-    return response;
-  }
-
-  filterTerrainDataFromDb(String filterType) async {
-    var filterDbReference = await FirebaseFirestore.instance
-        .collection("FilterCategory")
-        .doc(filterType)
-        .get();
-    if (filterDbReference.exists) {
-      Map<String, dynamic>? data = filterDbReference.data();
-      return data;
-    }
-  }
-
-  filterDistrictDataFromDb(String districtName) async {
-    var filterDbReference = await FirebaseFirestore.instance
-        .collection("FilterCategory")
-        .doc("District")
-        .collection("DistrictNames")
-        .doc(districtName)
-        .get();
-    if (filterDbReference.exists) {
-      Map<String, dynamic>? data = filterDbReference.data();
-      return data;
-    }
-  }
-
   Future<QuerySnapshot<Object?>> getHotelDataFromFirestore() async {
     var response = await FirebaseFirestore.instance
         .collection("Hospitality")
@@ -221,30 +180,6 @@ class FirebaseController extends GetxController {
     });
 
     return response;
-  }
-
-  Future<DocumentSnapshot<Object?>> touristPlaceHotelDetails(
-      String hotelId) async {
-    var response = await FirebaseFirestore.instance
-        .collection("Hospitality")
-        .doc(hotelId)
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
-      return documentSnapshot;
-    });
-
-    return response;
-  }
-
-  Future<DocumentSnapshot<Object?>> filterPlaceDetails(id) async {
-    var sortedPlaceDetail = await FirebaseFirestore.instance
-        .collection("Places")
-        .doc(id)
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
-      return documentSnapshot;
-    });
-    return sortedPlaceDetail;
   }
 
   Future<DocumentSnapshot<Object?>> getUserData() async {
@@ -259,63 +194,49 @@ class FirebaseController extends GetxController {
     return response;
   }
 
-  addFavToDB(String favItemId) async {
-    var response = await FirebaseFirestore.instance
-        .collection("Users")
-        .doc(currentUserId)
-        .collection("Favourites")
-        .doc(favItemId)
-        .set({"itemId": favItemId});
-  }
-
-  // removeFavFromDB(String itemId) async {
-  //   var response = await FirebaseFirestore.instance
-  //       .collection("Users")
-  //       .doc(currentUserId)
-  //       .collection("Favourites")
-  //       .doc(itemId)
-  //       .delete()
-  //       .then((value) => favSpot.remove(itemId));
-  //
-  //   for (var value in favSpot) {
-  //     log("favSpotdetails ..${value}");
-  //   }
-  // }
-  addStockToFirebase(Products productdata, String quantity ) async {
+  addStockToFirebase(Products productdata, String quantity) {
     var date = DateTime.now().toString();
-    var response = await FirebaseFirestore.instance
-        .collection("Stock").doc();
+    var response = FirebaseFirestore.instance.collection("Stock").doc();
     var stockId = response.id;
-    var finalData =  FirebaseStockModel(productName: productdata.productName, productRate: productdata.productRate!, productImage: productdata.productImage, categoryId: productdata.categoryId, dateAdded: date, quantity: quantity, stockId: stockId);
+    var finalData = FirebaseStockModel(
+      productId: productdata.productId!,
+      productName: productdata.productName!,
+      productRate: productdata.productRate!,
+      productImage: productdata.productImage!,
+      categoryId: productdata.categoryId!,
+      dateAdded: date,
+      quantity: quantity,
+      stockId: stockId,
+    );
 
-    response.set(finalData.toMap()).then((value) => Constants.customToast("data added successfully"));
+    response
+        .set(finalData.toMap())
+        .then((value) => Constants.customToast("data added successfully"));
   }
 
-  removeStockFromDB(FirebaseStockModel datamodel) async {
+  Future<RxBool> removeStockFromDB(FirebaseStockModel datamodel) async {
     var response = await FirebaseFirestore.instance
-        .collection("Users")
-        .doc(currentUserId)
-        .collection("Favourites")
+        .collection("Stock")
         .doc(datamodel.stockId)
         .delete()
-        .then((value) => availableStockModel
-        .removeWhere((item) => item.stockId == datamodel.stockId));
+        .then((bool) {
+      availableStockModel
+          .removeWhere((value) => value.stockId == datamodel.stockId);
+      deleteStatus.value = true;
+    });
+    return deleteStatus;
     update();
-
   }
 
-  getStockDataFromFireDB()  {
+  getStockDataFromFireDB() {
     var collection = FirebaseFirestore.instance.collection('Stock');
     collection.snapshots().listen((querySnapshot) {
       for (var doc in querySnapshot.docs) {
         var stockSnapshot =
-        FirebaseStockModel.fromDocumentSnapshot(documentSnapshot: doc);
+            FirebaseStockModel.fromDocumentSnapshot(documentSnapshot: doc);
         availableStockModel.add(stockSnapshot);
+        update();
       }
-
-    }
-    );
-
-
+    });
   }
 }

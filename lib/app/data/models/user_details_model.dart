@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserData {
-  String id;
-  String userName;
-  String mailId;
-  String password;
-  bool sms;
-  String userType;
+  String? id;
+  String? userName;
+  String? mailId;
+  String? password;
+  bool? sms;
+  String? userType;
 
   UserData(
       {required this.id,

@@ -26,7 +26,7 @@ class StartState extends State<SplashScreen> {
   }
 
   startTimer() async {
-    var duration = Duration(seconds: 3);
+    var duration = Duration(seconds: 0);
     return Timer(duration, route);
   }
 
@@ -34,7 +34,7 @@ class StartState extends State<SplashScreen> {
     await firebaseInitialization
         .then((value) => {Get.put(FirebaseController(), permanent: true)});
 
-    Get.offAll(BottomNavigationPage());
+    // Get.offAll(BottomNavigationPage());
   }
 
   initScreen(BuildContext context) {

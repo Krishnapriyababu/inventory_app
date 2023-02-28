@@ -3,8 +3,9 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:inventory_app/app/modules/product_details/products_detailed_controller.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../../core/utils/AppLayout.dart';
 import '../../../core/utils/Styles.dart';
-import '../../../core/utils/app_layout.dart';
 import '../../widgets/CathegoryItem.dart';
 import '../../widgets/app_bar_widget.dart';
 import '../../widgets/cathegory_divider.dart';
@@ -17,7 +18,7 @@ class ProductsDetailedScreen extends StatelessWidget {
 //  final Products products;
   final String categoryName;
   ProductsController _productsController =
-  Get.put(ProductsController());
+      Get.put(ProductsController());
 
   @override
   Widget build(BuildContext context) {
@@ -25,43 +26,66 @@ class ProductsDetailedScreen extends StatelessWidget {
         appBar: AppBarWidget(
           height: AppLayout.getHeight(120),
           headline: categoryName,
+          districtName: "details.placeDistrict",
         ),
         body: Container(
-          width: 100.w,
-          height: 100.h,
+            width: 100.w,
+            height: 100.h,
 
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                colors: [
-                  Colors.white,
-                  Colors.greenAccent,
-                ],
-                begin: FractionalOffset.bottomCenter,
-                end: FractionalOffset.bottomCenter,
-                tileMode: TileMode.mirror),
-          ),
-          child: Container(
-              height: 100.h,
-              width: 100.w,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [
+                    Colors.white,
+                    Colors.greenAccent,
+                  ],
+                  begin: FractionalOffset.bottomCenter,
+                  end: FractionalOffset.bottomCenter,
+                  tileMode: TileMode.mirror),
+            ),
+        child: Container(
+            height: 100.h,
+            width: 100.w,
+        
+            child: GetBuilder<ProductsController>(
+              builder: (context) {
+                return Obx(() => ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    physics:
+                    const BouncingScrollPhysics(),
+                    itemCount:
+                    context.localDbProducts.length,
+                    itemBuilder: (context, index) {
+                      return Row(children: [
+                        // TouristspotRecycler(
+                        //   placeDetail: exploreController
+                        //       .placeDetailList[index],
+                        // )
+                        ProductItemDetail(productdata: _productsController.localDbProducts[index],)
 
-              child: GetBuilder<ProductsController>(
-                builder: (context) {
-                  return Obx(() => ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      physics:
-                      const BouncingScrollPhysics(),
-                      itemCount:
-                      context.localDbProducts.length,
-                      itemBuilder: (context, index) {
-                        return Row(children: [
-                          ProductItemDetail(productdata: _productsController.localDbProducts[index],)
+                        //
+                        // SwipeCard(
+                        //     placeDetail:
+                        //     favouritesController
+                        //         .favPlaceDetailList[
+                        //     index],
+                        //     isBottom: false)
+                      ]);
+                    }));
+              },
+            )
 
-                        ]);
-                      }));
-                },
-              )
 
-          ),
+          // ListView(
+          //   scrollDirection: Axis.horizontal,
+          //   physics: const BouncingScrollPhysics(),
+          //   children: CATEGORIES
+          //       .map((category) => CathegoryItem(
+          //     category: category,
+          //     favouritesPage: false,
+          //   ))
+          //       .toList(),
+          // ),
+        ),
         ),
         backgroundColor: Colors.white);
   }

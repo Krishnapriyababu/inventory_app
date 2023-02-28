@@ -16,6 +16,8 @@ class LoginController extends GetxController {
   late TextEditingController userEmailController;
   late TextEditingController passwordController;
   late UserType userType;
+  var userName = "".obs;
+  var userloginedType = "".obs;
   RxString selectedUserType = "".obs;
   final FirebaseController _firebaseController = Get.put(FirebaseController());
 
@@ -53,7 +55,9 @@ class LoginController extends GetxController {
         Constants.customToast("Please turn on your internet");
       } else {
         _firebaseController.login(
-            userEmailController.text, passwordController.text);
+            "kpkichu333@gmail.com", "Priya@123");
+
+
       }
 
       log("dataaaa${userEmailController.text},${passwordController.text}");

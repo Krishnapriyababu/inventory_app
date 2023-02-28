@@ -9,12 +9,13 @@ import '../StockDetails/stock_screen.dart';
 import 'bottom_nav_controller.dart';
 
 class BottomNavigationPage extends StatelessWidget {
-   BottomNavigationPage({Key? key}) : super(key: key);
+   BottomNavigationPage({Key? key,}) : super(key: key);
+  // final String userType ;
   final  BottomNavigationController bottomNavController = Get.put(BottomNavigationController());
   static final List<Widget> _widgetOptions = <Widget>[
     DashboardScreen(),
     StockScreen(),
-    ReportScreen()
+    const ReportScreen()
   ];
   @override
   Widget build(BuildContext context) {
@@ -26,10 +27,14 @@ class BottomNavigationPage extends StatelessWidget {
         height: 8.h,
         width: 100.w,
 
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(width: .5, color: context.theme.colorScheme.surface),
+        margin:  EdgeInsets.only(
+            left:1.w, top: 0.0, right: 1.w, bottom:2.w),
+        padding: const EdgeInsets.only(left: 15,right: 15),
 
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+          border: Border.all(width: .5, color: Colors.blueAccent),
+          borderRadius: BorderRadius.circular(20),
         ),
         child: BottomNavigationBar(
           unselectedItemColor: context.theme.colorScheme.secondary,
@@ -38,8 +43,10 @@ class BottomNavigationPage extends StatelessWidget {
           currentIndex: bottomNavController.tabIndex.toInt(),
           showSelectedLabels: false,
           showUnselectedLabels: false,
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.black,
+          selectedLabelStyle: const TextStyle(color: Colors.grey),
+          unselectedLabelStyle: const TextStyle(color: Colors.green),
+          type: BottomNavigationBarType.shifting,
+          backgroundColor: Colors.white,
           elevation: 0.0,
 
           items: const [
@@ -56,7 +63,7 @@ class BottomNavigationPage extends StatelessWidget {
           ],
         ),
       ),
-      backgroundColor: context.theme.colorScheme.background,
+      backgroundColor: Colors.white,
 
     ));
   }

@@ -47,9 +47,15 @@ class DbHelper {
     var res = await db!.insert(productTable, productModel.toJson());
     return res;
   }
+  // Read all items (journals)
   Future<List<Map<String, dynamic>>> getCategoryList() async {
+ //   log("offset $offSet");
+    log("reslength before dbcall 1");
     Database? db = await instance.database;
+    //  var res = await db!.rawQuery("select * from $favouritesTableName");
+     log("reslength before dbcall 2");
     var res = await db!.rawQuery("select * from $categoryTable");
+   log("reslength ${res.length}");
     return res;
   }
   Future<List<Map<String, dynamic>>> getProductListByCategory(String categoryId) async {
@@ -64,7 +70,7 @@ class DbHelper {
   }
 
 
-  Future<void> deleteItem(String listType) async {
+   Future<void> deleteItem(String listType) async {
     Database? db =  await instance.database;
     try {
       if(listType == "Products") {
@@ -77,5 +83,7 @@ class DbHelper {
       log("Something went wrong when deleting an item: $err");
     }
   }
+
+
 
 }

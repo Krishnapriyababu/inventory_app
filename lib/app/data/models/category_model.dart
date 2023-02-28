@@ -18,11 +18,5 @@ class CategoryModel {
     data['imageurl'] = imageurl;
     return data;
   }
-  CategoryModel.fromMap(Map<String, dynamic> category){
-    categoryId =  category['category_id'];
-    categoryName = category['category_name'];
-    imageurl = category['imageurl'];
 
-
-  }
 }
