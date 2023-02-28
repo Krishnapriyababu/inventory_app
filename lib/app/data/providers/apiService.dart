@@ -25,7 +25,7 @@ class ApiServices extends GetConnect{
         await DbHelper.instance.insertCategory(datafetched);
       }
     } else {
-      throw Exception("Failed to get top news");
+      throw Exception("Failed to get data ");
     }
   }
   getProductsList() async {
@@ -44,7 +44,7 @@ class ApiServices extends GetConnect{
         await DbHelper.instance.insertProducts(datafetched);
       }
     } else {
-      throw Exception("Failed to get top news");
+      throw Exception("Failed to get data");
     }
   }
 }

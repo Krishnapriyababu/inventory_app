@@ -20,8 +20,8 @@ class ProductsController extends GetxController{
     var category = await DbHelper.instance.getProductListByCategory(categoryid);
     for (var element in category) {
       log("productdata ....  ${element["product_name"]}");
-     localDbProducts.add(Products(element["product_id"],element["product_name"],element["product_rate"],element["product_image"],element["category_id"]));
-    // localDbProducts.add(item);
+      localDbProducts.add(Products(element["product_id"],element["product_name"],element["product_rate"],element["product_image"],element["category_id"]));
+      // localDbProducts.add(item);
 
     }
   }

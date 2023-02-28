@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:inventory_app/app/modules/splash_page/splash_screen.dart';
+import 'package:inventory_app/app/modules/user_registration/registerScreen.dart';
 import 'package:sizer/sizer.dart';
-import 'Screens/viewProductsScreen.dart';
 
+import 'Screens/homePage.dart';
+import 'app/modules/user_login/login_page.dart';
 
 void main(){
   WidgetsFlutterBinding.ensureInitialized();

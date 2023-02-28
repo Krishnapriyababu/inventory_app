@@ -14,21 +14,6 @@ class ProductList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return ListView.builder(
-    //     itemCount: titles.length,
-    //     itemBuilder: (context, index) {
-    //       return Card(
-    //           child: ListTile(
-    //               title: Text(loginController.productList as String),
-    //               subtitle: Text(subtitles[index]),
-    //
-    //               leading: CircleAvatar(
-    //                   backgroundImage: NetworkImage(
-    //                       "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
-    //
-    //           )
-    //       );
-    //     });
      return Expanded(
       child: ListView.builder(
          itemCount: productListController.prodcts.length,

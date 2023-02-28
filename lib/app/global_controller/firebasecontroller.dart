@@ -22,6 +22,7 @@ class FirebaseController extends GetxController {
   String currentUserId = "";
 
   late Rx<User?> firebaseUser;
+  var availableStockModel = <FirebaseStockModel>[].obs;
   var favSpot = <String>[].obs;
   User? user;
   RxBool netWorkStatus = true.obs;
@@ -37,6 +38,7 @@ class FirebaseController extends GetxController {
   void onInit() {
     super.onInit();
     _getConnectionType();
+    getStockDataFromFireDB();
     _streamSubscription =
         _connectivity.onConnectivityChanged.listen(_updateState);
     firebaseUser = Rx<User?>(firebaseAuth.currentUser);
@@ -266,19 +268,19 @@ class FirebaseController extends GetxController {
         .set({"itemId": favItemId});
   }
 
-  removeFavFromDB(String itemId) async {
-    var response = await FirebaseFirestore.instance
-        .collection("Users")
-        .doc(currentUserId)
-        .collection("Favourites")
-        .doc(itemId)
-        .delete()
-        .then((value) => favSpot.remove(itemId));
-
-    for (var value in favSpot) {
-      log("favSpotdetails ..${value}");
-    }
-  }
+  // removeFavFromDB(String itemId) async {
+  //   var response = await FirebaseFirestore.instance
+  //       .collection("Users")
+  //       .doc(currentUserId)
+  //       .collection("Favourites")
+  //       .doc(itemId)
+  //       .delete()
+  //       .then((value) => favSpot.remove(itemId));
+  //
+  //   for (var value in favSpot) {
+  //     log("favSpotdetails ..${value}");
+  //   }
+  // }
   addStockToFirebase(Products productdata, String quantity ) async {
     var date = DateTime.now().toString();
     var response = await FirebaseFirestore.instance
@@ -289,4 +291,31 @@ class FirebaseController extends GetxController {
     response.set(finalData.toMap()).then((value) => Constants.customToast("data added successfully"));
   }
 
+  removeStockFromDB(FirebaseStockModel datamodel) async {
+    var response = await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(currentUserId)
+        .collection("Favourites")
+        .doc(datamodel.stockId)
+        .delete()
+        .then((value) => availableStockModel
+        .removeWhere((item) => item.stockId == datamodel.stockId));
+    update();
+
+  }
+
+  getStockDataFromFireDB()  {
+    var collection = FirebaseFirestore.instance.collection('Stock');
+    collection.snapshots().listen((querySnapshot) {
+      for (var doc in querySnapshot.docs) {
+        var stockSnapshot =
+        FirebaseStockModel.fromDocumentSnapshot(documentSnapshot: doc);
+        availableStockModel.add(stockSnapshot);
+      }
+
+    }
+    );
+
+
+  }
 }

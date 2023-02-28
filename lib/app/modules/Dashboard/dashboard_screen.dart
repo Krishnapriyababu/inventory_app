@@ -124,7 +124,8 @@ class DashboardScreen extends StatelessWidget {
                       width: 100.w,
                       child: GetBuilder<DashboardController>(
                         builder: (context) {
-                          return Obx(() => ListView.builder(
+                          return
+                              ListView.builder(
                               scrollDirection: Axis.vertical,
                               physics:
                               const BouncingScrollPhysics(),
@@ -137,7 +138,8 @@ class DashboardScreen extends StatelessWidget {
                                   )
 
                                 ]);
-                              }));
+                              })
+                          ;
                         },
                       )
                   ),

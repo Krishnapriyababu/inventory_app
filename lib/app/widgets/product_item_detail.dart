@@ -83,7 +83,7 @@ Widget build(BuildContext context) {
                   ],
                 ),
                 SizedBox(
-                  height: 2.h,
+                  height: 1 .h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -112,7 +112,8 @@ Widget build(BuildContext context) {
                                 _firebaseController.addStockToFirebase(productdata,productsController.quantity.text);
                                 productsController.quantity.text = "";
                               }
-                            });
+                            }
+                            );
                       },
                       child: Container(
                         width: 4.h,
@@ -125,7 +126,7 @@ Widget build(BuildContext context) {
                                 image: AssetImage(
                                     "assets/images/addtostock.png"))),
                       ),
-                    )
+                    ),
                   ],
                 )
               ],

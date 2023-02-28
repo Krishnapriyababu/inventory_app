@@ -9,7 +9,7 @@ class DashboardController extends GetxController{
   List<Map<String, dynamic>> categoryList = [];
   final ApiServices _apiServices = ApiServices();
   var data;
-  var localDbCategory = <CategoryModel>[].obs;
+  var localDbCategory = <CategoryModel>[];
   @override
   void onInit() {
     getCategoryDetails();
@@ -32,6 +32,6 @@ class DashboardController extends GetxController{
       // log("dbDataaa ....  ${localDbCategory.length}");
 
     }
-
+    update();
   }
 }
