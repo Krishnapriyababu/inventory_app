@@ -4,6 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:inventory_app/app/data/models/category_model.dart';
 
 import '../Dashboard/dashboard_controller.dart';
+import '../product_details/products_detailed_screen.dart';
 
 void main() {
   runApp(const SearchSCreen());
@@ -18,7 +19,7 @@ class SearchSCreen extends StatelessWidget {
     return const MaterialApp(
       // Remove the debug banner
       debugShowCheckedModeBanner: false,
-      title: 'Kindacode.com',
+      title: 'Find category',
       home: HomePage(),
     );
   }
@@ -61,7 +62,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Kindacode.com'),
+        title: const Text('Find Item'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
@@ -93,8 +94,7 @@ class _HomePageState extends State<HomePage> {
                       style: const TextStyle(fontSize: 24),
                     ),
                     title: Text(_foundData[index].categoryName.toString()),
-                    // subtitle: Text(
-                    //     '${_foundUsers[index]["age"].toString()} years old'),
+
                   ),
                 ),
               )
