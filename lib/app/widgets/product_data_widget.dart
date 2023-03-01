@@ -13,7 +13,7 @@ class ProductDataWidget extends StatelessWidget {
       children: [
         Text(
           title,
-          style: heading2,
+          style: heading1,
         ),
         Text(
           data,

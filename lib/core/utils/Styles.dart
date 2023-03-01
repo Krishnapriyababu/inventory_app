@@ -8,7 +8,7 @@ TextStyle heading2 =  TextStyle(fontSize: 10.sp, color: Colors.black26,fontWeigh
 TextStyle heading4 =  TextStyle(
     fontSize: 12.sp, color: Colors.black, fontWeight: FontWeight.w600);
 TextStyle heading5 =
-TextStyle(fontSize: 20.sp, color: Colors.blue, fontWeight: FontWeight.bold);
+TextStyle(fontSize: 15.sp, color: Colors.blue, fontWeight: FontWeight.bold);
 
 TextStyle heading6 =  TextStyle(
     fontSize: 18.sp, color: blackshade, fontWeight: FontWeight.bold);

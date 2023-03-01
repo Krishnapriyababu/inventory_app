@@ -23,7 +23,7 @@ class StockScreen extends StatelessWidget {
         appBar: AppBarWidget(
           height: AppLayout.getHeight(120),
           headline: "WareHouse",
-          districtName: "details.placeDistrict",
+
         ),
         body: Container(
           width: 100.w,

@@ -6,14 +6,12 @@ import '../../core/utils/AppLayout.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final double height;
-  final String districtName;
   final String headline;
 
   const AppBarWidget({
     Key? key,
     required this.height,
     required this.headline,
-    required this.districtName,
   }) : super(key: key);
 
   @override
@@ -75,39 +73,3 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-// Padding(
-// padding: EdgeInsets.all(AppLayout.getHeight(25)),
-// child: Row(
-// mainAxisAlignment: MainAxisAlignment.spaceBetween,
-// children: [
-// Container(
-// width: AppLayout.getWidth(70),
-// height: AppLayout.getHeight(70),
-// margin: const EdgeInsets.only(top: 10,left: 15,right: 15),
-// //   margin: const EdgeInsets.only(top: 10,bottom: 700),
-// decoration: BoxDecoration(
-// borderRadius: BorderRadius.circular(10),
-// image: const DecorationImage(
-// fit: BoxFit.cover,
-// image: AssetImage(
-// "assets/images/letsgo.png"))),
-// ),
-// Container(
-// width: AppLayout.getWidth(150),
-// height: AppLayout.getHeight(50),
-// margin: const EdgeInsets.only(top: 15,left: 10,right: 70),
-// child:
-// Text(
-// details.placeName,
-// style: const TextStyle(
-// fontFamily: "BerkshireSwash",
-// color: blackshade,
-// fontSize: 30,
-// fontWeight: FontWeight.bold),
-// ),
-//
-// ),
-//
-// ],
-// ),
-// ),

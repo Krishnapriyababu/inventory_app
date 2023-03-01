@@ -26,7 +26,6 @@ class ProductsDetailedScreen extends StatelessWidget {
         appBar: AppBarWidget(
           height: AppLayout.getHeight(120),
           headline: categoryName,
-          districtName: "details.placeDistrict",
         ),
         body: Container(
             width: 100.w,
@@ -56,35 +55,12 @@ class ProductsDetailedScreen extends StatelessWidget {
                     context.localDbProducts.length,
                     itemBuilder: (context, index) {
                       return Row(children: [
-                        // TouristspotRecycler(
-                        //   placeDetail: exploreController
-                        //       .placeDetailList[index],
-                        // )
-                        ProductItemDetail(productdata: _productsController.localDbProducts[index],)
 
-                        //
-                        // SwipeCard(
-                        //     placeDetail:
-                        //     favouritesController
-                        //         .favPlaceDetailList[
-                        //     index],
-                        //     isBottom: false)
+                        ProductItemDetail(productdata: _productsController.localDbProducts[index],)
                       ]);
                     }));
               },
             )
-
-
-          // ListView(
-          //   scrollDirection: Axis.horizontal,
-          //   physics: const BouncingScrollPhysics(),
-          //   children: CATEGORIES
-          //       .map((category) => CathegoryItem(
-          //     category: category,
-          //     favouritesPage: false,
-          //   ))
-          //       .toList(),
-          // ),
         ),
         ),
         backgroundColor: Colors.white);

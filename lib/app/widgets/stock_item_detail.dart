@@ -10,6 +10,8 @@ import 'package:sizer/sizer.dart';
 import '../data/models/firebase_stock_model.dart';
 import '../data/models/product_model.dart';
 import '../global_controller/firebasecontroller.dart';
+import '../modules/StockDetailedReport/stock_report_controller.dart';
+import '../modules/StockDetailedReport/stock_report_screen.dart';
 import '../modules/product_details/products_detailed_controller.dart';
 
 class StockItemDetail extends StatelessWidget {
@@ -19,13 +21,13 @@ class StockItemDetail extends StatelessWidget {
   StockDetailsController stockDetailsController =
       Get.put(StockDetailsController());
   final FirebaseController _firebaseController = Get.put(FirebaseController());
-
+  final StockReportController stockReportController = Get.put(StockReportController());
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {},
       child: Container(
-        height: 20.h,
+        height: 25.h,
         width: 95.w,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -37,8 +39,8 @@ class StockItemDetail extends StatelessWidget {
           children: [
 
             Container(
-              width: 13.h,
-              height: 15.h,
+              width: 10.h,
+              height: 10.h,
               margin: EdgeInsets.only(
                 left: 1.w,
               ),
@@ -53,7 +55,7 @@ class StockItemDetail extends StatelessWidget {
             SizedBox(height: 2.h),
 
             Container(
-              width: 60.w,
+              width: 70.w,
               height: 15.h,
               margin: EdgeInsets.only(left: 2.w, top: 1.h),
               child: Column(
@@ -72,11 +74,17 @@ class StockItemDetail extends StatelessWidget {
                         data: productdata.productId!,
                         title: 'Pdt Id : ',
                       ),
+                    //   ProductDataWidget(
+                    //     data: productdata.categoryId!,
+                    //     title: 'Ctg Id : ',
+                    //   ),
                       ProductDataWidget(
-                        data: productdata.categoryId!,
-                        title: 'Ctg Id : ',
+                        data: (int.parse(productdata.quantity) *
+                            int.parse(productdata.productRate))
+                            .toString(),
+                        title: 'total : ',
                       ),
-                    ],
+                   ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -87,23 +95,12 @@ class StockItemDetail extends StatelessWidget {
                       ),
                       ProductDataWidget(
                         data: productdata.productRate!,
-                        title: 'Pdt price : ',
+                        title: ' price : ',
                       ),
                     ],
                   ),
                   SizedBox(
                     height: 1.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ProductDataWidget(
-                        data: (int.parse(productdata.quantity) *
-                                int.parse(productdata.productRate))
-                            .toString(),
-                        title: 'Stock value : ',
-                      ),
-                    ],
                   ),
                   SizedBox(
                     height: 1.w,
@@ -115,13 +112,12 @@ class StockItemDetail extends StatelessWidget {
                           children: [
                               InkWell(
                                 onTap: () {
-                                  // _firebaseController
-                                  //     .removeStockFromDB(productdata);
-                                  // Constants.customToast("tapped remove");
+                                  stockReportController.generateStockReport(stockDetailsController.stockDetailFromFirebase,productdata);
+                                  Get.to(StockReportScreen(categoryName: productdata,));
                                 },
                                 child: Container(
-                                  width: 4.h,
-                                  height: 4.h,
+                                  width: 3.h,
+                                  height: 3.h,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     border: Border.all(color: Colors.black54),
@@ -139,8 +135,8 @@ class StockItemDetail extends StatelessWidget {
                                   Constants.customToast("tapped remove");
                                 },
                                 child: Container(
-                                  width: 4.h,
-                                  height: 4.h,
+                                  width: 3.h,
+                                  height: 3.h,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     border: Border.all(color: Colors.black54),

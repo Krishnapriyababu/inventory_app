@@ -22,11 +22,7 @@ class ProductItemDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // Get.to(() =>
-        //     DetailedViewScreen(
-        //   details: placeDetail,
-        // )
-        // );
+
       },
       child: Container(
         height: 15.h,
@@ -39,20 +35,6 @@ class ProductItemDetail extends StatelessWidget {
         margin: EdgeInsets.all(1.h),
         child: Row(
           children: [
-            // Container(
-            //   decoration: BoxDecoration(
-            //       borderRadius:
-            //       const BorderRadius.all(Radius.circular(15)),
-            //       border: Border.all(
-            //           color: Colors.white),
-            //   ),
-            //   padding: EdgeInsets.only(left: 1.h),
-            //   child: Image.network( productdata.productImage!,
-            //     width: 15.h,
-            //     height: 15.h,
-            //    )
-            // ),
-
             Container(
               width: 10.h,
               height: 10.h,
@@ -97,7 +79,7 @@ class ProductItemDetail extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 2.h,
+                    height: 1.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -130,13 +112,17 @@ class ProductItemDetail extends StatelessWidget {
                               });
                         },
                         child: Container(
-                          width: 4.h,
-                          height: 4.h,
+                          width: 3.h,
+                          height: 3.h,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(color: Colors.black54),
                               image: const DecorationImage(
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.fill,
+                                  colorFilter: const ColorFilter.mode(
+                                    Colors.redAccent,
+                                    BlendMode.saturation,
+                                  ),
                                   image: AssetImage(
                                       "assets/images/addtostock.png"))),
                         ),

@@ -77,19 +77,6 @@ class DashboardScreen extends StatelessWidget {
                     ),
                   ),
 
-                  // Container(
-                  //   width: AppLayout.getScreenWidth(),
-                  //
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.center,
-                  //     children: [
-                  //       SearchWidget(
-                  //         hintTitle: 'Search Spot', enable: false,
-                  //       )
-                  //     ],
-                  //   ),
-                  //
-                  // ),
                   SizedBox(
                     height: 2.h,
                   ),
@@ -155,83 +142,18 @@ class DashboardScreen extends StatelessWidget {
                               CathegoryItem(
                                   category: dashboardController.localDbCategory[index],
                                 )
-
-                                //
-                                // SwipeCard(
-                                //     placeDetail:
-                                //     favouritesController
-                                //         .favPlaceDetailList[
-                                //     index],
-                                //     isBottom: false)
                               ]);
                             });
                       },
                     )
 
-
-                    // ListView(
-                    //   scrollDirection: Axis.horizontal,
-                    //   physics: const BouncingScrollPhysics(),
-                    //   children: CATEGORIES
-                    //       .map((category) => CathegoryItem(
-                    //     category: category,
-                    //     favouritesPage: false,
-                    //   ))
-                    //       .toList(),
-                    // ),
                   ),
 
 
-
-
-
-                  // exploreController.placeDetailList.isEmpty
-                  //     ? const LoaderWidget()
-                  //     : Container(
-                  //     height: AppLayout.getHeight(350),
-                  //     width: AppLayout.getScreenWidth(),
-                  //     child: GetBuilder<ExploreController>(
-                  //         builder: (context) {
-                  //           return ListView.builder(
-                  //               scrollDirection: Axis.horizontal,
-                  //               physics: const BouncingScrollPhysics(),
-                  //               itemCount: exploreController
-                  //                   .placeDetailList.length,
-                  //               itemBuilder: (context, index) {
-                  //                 return Row(children: [
-                  //                   TouristSpotRecycler(
-                  //                     placeDetail: exploreController
-                  //                         .placeDetailList[index],
-                  //                   )
-                  //                 ]);
-                  //               });
-                  //         })),
                   SizedBox(
                     height: AppLayout.getHeight(10),
                   ),
-                  // exploreController.hotelDetailList.length == 0
-                  //     ? const LoaderWidget()
-                  //     : Container(
-                  //     height: AppLayout.getHeight(280),
-                  //     width: AppLayout.getScreenWidth(),
-                  //     padding: const EdgeInsets.all(2),
-                  //     color: Colors.transparent,
-                  //     child: GetBuilder<ExploreController>(
-                  //         builder: (context) {
-                  //           return ListView.builder(
-                  //               scrollDirection: Axis.horizontal,
-                  //               physics: const BouncingScrollPhysics(),
-                  //               itemCount: exploreController
-                  //                   .hotelDetailList.length,
-                  //               itemBuilder: (context, index) {
-                  //                 return Row(children: [
-                  //                   HospitalityItemWidget(
-                  //                     hotelDetail: exploreController
-                  //                         .hotelDetailList[index],
-                  //                   )
-                  //                 ]);
-                  //               });
-                  //         })),
+
                 ],
               ),
             ),
@@ -239,57 +161,6 @@ class DashboardScreen extends StatelessWidget {
         ),
       )
 
-
-
-
-
-
-
-
-
-
-
-
-
-      // Container(
-      //   width: 100.w,
-      //   height: 100.h,
-      //   child: ListView(
-      //       physics: const BouncingScrollPhysics(),
-      //       children: [
-      //         Container(
-      //             height: 8.h,
-      //             width: 100.w,
-      //             margin: EdgeInsets.all(2.h),
-      //             decoration: BoxDecoration(
-      //                 borderRadius: BorderRadius.circular(10),
-      //                 color: Colors.white),
-      //             child: Column(
-      //               crossAxisAlignment: CrossAxisAlignment.start,
-      //               children: [
-      //                 Container(
-      //                     padding:EdgeInsets.all(2.h),
-      //                     child: Text("Category" ,style: TextStyle(color: Colors.grey,fontSize: 13.sp,fontWeight: FontWeight.w400),)),
-      //               ],
-      //             )
-      //         ),
-      //         Row(
-      //           children: const [
-      //             CategorySquareWidget(itemassetDetail: 'assets/images/splash_image.png', itemTitle: ' \nLive practice',),
-      //             CategorySquareWidget(itemassetDetail: 'assets/images/splash_image.png', itemTitle: '   Pending\nassignments',)
-      //           ],
-      //         ),
-      //         Row(
-      //           children: const [
-      //             CategorySquareWidget(itemassetDetail: 'assets/images/splash_image.png', itemTitle: ' \nMy players',),
-      //             CategorySquareWidget(itemassetDetail: 'assets/images/splash_image.png',  itemTitle: ' \nCourses',)
-      //           ],
-      //         )
-      //
-      //
-      //       ]),
-      //
-      // ),
     );
   }
 }
