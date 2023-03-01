@@ -59,16 +59,11 @@ class StockScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return Row(children: [
                          StockItemDetail(productdata: stockDetailsController.stockDetailFromFirebase.value[index])
-                        // Container(
-                        //   width: 25.w,
-                        //   height: 1.h,
-                        //   decoration: const BoxDecoration(
-                        //     color: Colors.red,
-                        //   ),
-                        // )
                         ]
                         );
-                      }));
+                      }
+                      )
+                  );
                 },
               )
 

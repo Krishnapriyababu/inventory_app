@@ -40,7 +40,7 @@ class StockDetailsController extends GetxController {
         .removeWhere((value) => value.stockId == productdata.stockId);
     stockfirebaseController.deleteStatus.value = false;
     update();
-  }{
+  }else{
     Constants.customToast("Unable to remove from db");
   }
   }

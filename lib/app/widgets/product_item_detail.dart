@@ -107,6 +107,7 @@ class ProductItemDetail extends StatelessWidget {
                                 if(productsController.quantity != ""){
                                   _firebaseController.addStockToFirebase(productdata,productsController.quantity.text);
                                   Get.back();
+
                                  // productsController.quantity.text = "";
                                 }
                               });

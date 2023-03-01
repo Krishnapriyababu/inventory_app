@@ -171,16 +171,6 @@ class FirebaseController extends GetxController {
     } catch (e) {}
   }
 
-  Future<QuerySnapshot<Object?>> getHotelDataFromFirestore() async {
-    var response = await FirebaseFirestore.instance
-        .collection("Hospitality")
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      return querySnapshot;
-    });
-
-    return response;
-  }
 
   Future<DocumentSnapshot<Object?>> getUserData() async {
     currentUserId = firebaseUser.value!.uid;
@@ -211,7 +201,9 @@ class FirebaseController extends GetxController {
 
     response
         .set(finalData.toMap())
-        .then((value) => Constants.customToast("data added successfully"));
+        .then((value) => Constants.customToast("data added successfully")
+    );
+    update();
   }
 
   Future<RxBool> removeStockFromDB(FirebaseStockModel datamodel) async {
@@ -225,11 +217,11 @@ class FirebaseController extends GetxController {
       deleteStatus.value = true;
     });
     return deleteStatus;
-    update();
+
   }
 
-  getStockDataFromFireDB() {
-    var collection = FirebaseFirestore.instance.collection('Stock');
+  getStockDataFromFireDB() async{
+    var collection =  await FirebaseFirestore.instance.collection('Stock');
     collection.snapshots().listen((querySnapshot) {
       for (var doc in querySnapshot.docs) {
         var stockSnapshot =
@@ -237,6 +229,7 @@ class FirebaseController extends GetxController {
         availableStockModel.add(stockSnapshot);
         update();
       }
+      update();
     });
   }
 }

@@ -39,8 +39,8 @@ class StockItemDetail extends StatelessWidget {
           children: [
 
             Container(
-              width: 10.h,
-              height: 10.h,
+              width: 13.h,
+              height: 13.h,
               margin: EdgeInsets.only(
                 left: 1.w,
               ),
@@ -55,7 +55,7 @@ class StockItemDetail extends StatelessWidget {
             SizedBox(height: 2.h),
 
             Container(
-              width: 70.w,
+              width: 60.w,
               height: 15.h,
               margin: EdgeInsets.only(left: 2.w, top: 1.h),
               child: Column(
