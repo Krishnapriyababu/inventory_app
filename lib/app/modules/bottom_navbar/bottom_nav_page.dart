@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:inventory_app/app/modules/SearchScreen/search_screen.dart';
 import 'package:sizer/sizer.dart';
 
 import '../Dashboard/dashboard_screen.dart';
-import '../ReportScreen/report_screen.dart';
+
 import '../StockDetails/stock_screen.dart';
 import 'bottom_nav_controller.dart';
 
@@ -15,7 +16,7 @@ class BottomNavigationPage extends StatelessWidget {
   static final List<Widget> _widgetOptions = <Widget>[
     DashboardScreen(),
     StockScreen(),
-    const ReportScreen()
+     SearchSCreen()
   ];
   @override
   Widget build(BuildContext context) {
@@ -58,8 +59,8 @@ class BottomNavigationPage extends StatelessWidget {
                 icon: Icon(Icons.inventory_2_outlined,color: Colors.green),
                 activeIcon: Icon(Icons.inventory_2_rounded,color: Colors.green), label: "Stock"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.insert_chart_outlined_rounded,color: Colors.green),
-                activeIcon: Icon(Icons.insert_chart_rounded,color: Colors.green), label: "Report"),
+                icon: Icon(Icons.search,color: Colors.green),
+                activeIcon: Icon(Icons.saved_search_sharp,color: Colors.green), label: "search"),
           ],
         ),
       ),
