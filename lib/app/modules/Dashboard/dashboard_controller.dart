@@ -33,9 +33,6 @@ class DashboardController extends GetxController{
          update();
        }
      }
-
-
-
      update();
   }
 

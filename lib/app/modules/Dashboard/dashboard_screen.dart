@@ -135,10 +135,6 @@ class DashboardScreen extends StatelessWidget {
                             context.localDbCategory.length,
                             itemBuilder: (context, index) {
                               return Row(children: [
-                                // TouristspotRecycler(
-                                //   placeDetail: exploreController
-                                //       .placeDetailList[index],
-                                // )
                               CathegoryItem(
                                   category: dashboardController.localDbCategory[index],
                                 )

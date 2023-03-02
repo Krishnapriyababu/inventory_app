@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:inventory_app/app/modules/SearchScreen/search_screen.dart';
+import 'package:inventory_app/app/modules/user_login/login_page.dart';
 import 'package:sizer/sizer.dart';
 
 import '../Dashboard/dashboard_screen.dart';
@@ -16,7 +17,8 @@ class BottomNavigationPage extends StatelessWidget {
   static final List<Widget> _widgetOptions = <Widget>[
     DashboardScreen(),
     StockScreen(),
-     SearchScreen()
+     SearchScreen(),
+    LoginPage()
   ];
   @override
   Widget build(BuildContext context) {
@@ -61,6 +63,10 @@ class BottomNavigationPage extends StatelessWidget {
             BottomNavigationBarItem(
                 icon: Icon(Icons.search,color: Colors.green),
                 activeIcon: Icon(Icons.saved_search_sharp,color: Colors.green), label: "search"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.logout,color: Colors.green),
+                activeIcon: Icon(Icons.login_outlined,color: Colors.green), label: "Exit"),
+
           ],
         ),
       ),

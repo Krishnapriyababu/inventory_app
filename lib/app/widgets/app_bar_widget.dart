@@ -34,17 +34,28 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              width: AppLayout.getWidth(55),
-              height: AppLayout.getHeight(55),
-              margin: EdgeInsets.only(
-                  top: 5.h,),
-              //   margin: const EdgeInsets.only(top: 10,bottom: 700),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: const DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage("assets/images/splash_image.png.png"))),
+            InkWell(
+              onTap: (){
+                if(headline == "Inventory Manager"){
+
+                }
+              },
+              child: Container(
+                width: AppLayout.getWidth(55),
+                height: AppLayout.getHeight(55),
+                margin: EdgeInsets.only(
+                    top: 5.h,),
+                //   margin: const EdgeInsets.only(top: 10,bottom: 700),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    image: const DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage("assets/images/splash_image.png.png")
+
+                    )
+
+                ),
+              ),
             ),
             Row(
               children: [
