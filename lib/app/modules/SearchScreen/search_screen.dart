@@ -44,7 +44,8 @@ class _HomePageState extends State<HomePage> {
   void _runFilter(String enteredKeyword) {
     List<CategoryModel> results = [];
     if (enteredKeyword.isEmpty) {
-      results = _foundData;
+
+      results = dashboardController.localDbCategory;
     } else {
       results = _foundData
           .where((user) =>
@@ -85,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                 itemCount: _foundData.length,
                 itemBuilder: (context, index) => Card(
                   key: ValueKey(_foundData[index]),
-                  color: Colors.amberAccent,
+                  color: Colors.cyanAccent,
                   elevation: 4,
                   margin: const EdgeInsets.symmetric(vertical: 10),
                   child: ListTile(
@@ -93,15 +94,19 @@ class _HomePageState extends State<HomePage> {
                       _foundData[index].categoryId.toString(),
                       style: const TextStyle(fontSize: 24),
                     ),
+
+
                     title: Text(_foundData[index].categoryName.toString()),
 
                   ),
                 ),
               )
-                  : const Text(
+                  :  Text(
                 'No results found',
                 style: TextStyle(fontSize: 24),
               ),
+
+
             ),
           ],
         ),
