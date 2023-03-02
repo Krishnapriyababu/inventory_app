@@ -16,7 +16,7 @@ class BottomNavigationPage extends StatelessWidget {
   static final List<Widget> _widgetOptions = <Widget>[
     DashboardScreen(),
     StockScreen(),
-     SearchSCreen()
+     SearchScreen()
   ];
   @override
   Widget build(BuildContext context) {

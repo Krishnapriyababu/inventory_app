@@ -7,12 +7,12 @@ import '../Dashboard/dashboard_controller.dart';
 import '../product_details/products_detailed_screen.dart';
 
 void main() {
-  runApp(const SearchSCreen());
+  runApp(const SearchScreen());
 }
 
-class SearchSCreen extends StatelessWidget {
+class SearchScreen extends StatelessWidget {
 
-  const SearchSCreen({Key? key}) : super(key: key);
+  const SearchScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
