@@ -18,20 +18,21 @@ class DashboardController extends GetxController{
     dashboardfirebaseController.getStockDataFromFireDB();
     getCategoryDetails();
     getProductsList();
-    getCategory();
+   // getCategory();
   }
      getCategoryDetails() async {
      data = await _apiServices.getCategoryList();
      log("inside gettask ");
      if (data.statusCode == 200) {
-       var category = await DbHelper.instance.getCategoryList();
-       for (var element in category) {
+       // var category = await DbHelper.instance.getCategoryList();
+       for (var element in data.body) {
 
 
          localDbCategory.add(CategoryModel(element["category_id"], element["category_name"], element["imageurl"]));
-         log("dbDataaa ....  ${localDbCategory.length}");
+         log("dbDataaa ....  ${data.body}");
          update();
        }
+
      }
      update();
   }
@@ -40,8 +41,10 @@ class DashboardController extends GetxController{
     log("inside getProductsList ");
     await _apiServices.getProductsList();
   }
-  Future<void>  getCategory() async {
-
-
-  }
+  // Future<void>  getCategory() async {
+  //   data = await _apiServices.getCategoryList();
+  //   if (data.statusCode == 200) {
+  //     log("category api data ....  ${data.body}");
+  //   }
+  // }
 }

@@ -16,15 +16,15 @@ class ApiServices extends GetConnect {
     if (response.statusCode == 200) {
       final result = response.body;
       // log("dbdataaaacategory   $result");
-      await DbHelper.instance.deleteItem("Category");
+    //  await DbHelper.instance.deleteItem("Category");
       for (var data in result) {
         var datafetched = CategoryModel.fromJson(data);
         log("dbdataaaa   ${datafetched.categoryName}");
-        await DbHelper.instance.insertCategory(datafetched);
+     //   await DbHelper.instance.insertCategory(datafetched);
       }
 
     } else {
-      throw Exception("Failed to get top news");
+      throw Exception("Failed to get data");
     }
     return response;
   }
