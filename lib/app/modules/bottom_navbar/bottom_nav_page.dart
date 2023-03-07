@@ -42,7 +42,8 @@ class BottomNavigationPage extends StatelessWidget {
         child: BottomNavigationBar(
           unselectedItemColor: context.theme.colorScheme.secondary,
           selectedItemColor:context.theme.colorScheme.surface,
-          onTap: bottomNavController.changetabIndex,
+          onTap:
+            bottomNavController.changetabIndex,
           currentIndex: bottomNavController.tabIndex.toInt(),
           showSelectedLabels: false,
           showUnselectedLabels: false,
@@ -66,8 +67,8 @@ class BottomNavigationPage extends StatelessWidget {
             BottomNavigationBarItem(
                 icon: Icon(Icons.logout,color: Colors.green),
                 activeIcon: Icon(Icons.login_outlined,color: Colors.green), label: "Exit"),
-
           ],
+
         ),
       ),
       backgroundColor: Colors.white,

@@ -13,5 +13,8 @@ FirebaseController firebaseController = Get.put(FirebaseController());
   }
   void changetabIndex(int index){
     tabIndex.value = index;
+    if(index == 3){
+      firebaseController.signOut();
+    }
   }
 }
