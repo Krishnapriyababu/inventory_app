@@ -29,7 +29,7 @@ class ApiServices extends GetConnect {
     return response;
   }
 
-  getProductsList() async {
+  Future<Response> getProductsList() async {
     const url = "https://demo4087667.mockable.io/productlist";
     //   log("inside getProductsList api ");
     Response response = await _getConnect.get(url);
@@ -37,15 +37,16 @@ class ApiServices extends GetConnect {
     if (response.statusCode == 200) {
       //   log("inside getProductsList staus got");
       final result = response.body;
-      await DbHelper.instance.deleteItem("Products");
+   //   await DbHelper.instance.deleteItem("Products");
       for (var data in result["products"]) {
         var datafetched = Products.fromJson(data);
        // log("dbdataaaagetProductsList   ${datafetched.productName}");
 
-        await DbHelper.instance.insertProducts(datafetched);
+     //   await DbHelper.instance.insertProducts(datafetched);
       }
     } else {
-      throw Exception("Failed to get top news");
+      throw Exception("Failed to get data");
     }
+    return response;
   }
 }

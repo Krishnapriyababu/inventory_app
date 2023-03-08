@@ -50,7 +50,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     borderRadius: BorderRadius.circular(10),
                     image: const DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage("assets/images/splash_image.png.png")
+                        image: AssetImage("assets/images/splash_image.png")
 
                     )
 

@@ -47,7 +47,7 @@ class ProductsDetailedScreen extends StatelessWidget {
         
             child: GetBuilder<ProductsController>(
               builder: (context) {
-                return Obx(() => ListView.builder(
+                return  ListView.builder(
                     scrollDirection: Axis.vertical,
                     physics:
                     const BouncingScrollPhysics(),
@@ -58,7 +58,9 @@ class ProductsDetailedScreen extends StatelessWidget {
 
                         ProductItemDetail(productdata: _productsController.localDbProducts[index],)
                       ]);
-                    }));
+                    }
+                    );
+
               },
             )
         ),

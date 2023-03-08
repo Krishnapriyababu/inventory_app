@@ -17,7 +17,7 @@ class DashboardController extends GetxController{
   void onInit() {
     dashboardfirebaseController.getStockDataFromFireDB();
     getCategoryDetails();
-    getProductsList();
+  // getProductsList();
    // getCategory();
   }
      getCategoryDetails() async {
@@ -26,8 +26,6 @@ class DashboardController extends GetxController{
      if (data.statusCode == 200) {
        // var category = await DbHelper.instance.getCategoryList();
        for (var element in data.body) {
-
-
          localDbCategory.add(CategoryModel(element["category_id"], element["category_name"], element["imageurl"]));
          log("dbDataaa ....  ${data.body}");
          update();
@@ -37,10 +35,10 @@ class DashboardController extends GetxController{
      update();
   }
 
-  Future<void> getProductsList() async {
-    log("inside getProductsList ");
-    await _apiServices.getProductsList();
-  }
+  // Future<void> getProductsList() async {
+  //   log("inside getProductsList ");
+  //   await _apiServices.getProductsList();
+  // }
   // Future<void>  getCategory() async {
   //   data = await _apiServices.getCategoryList();
   //   if (data.statusCode == 200) {
