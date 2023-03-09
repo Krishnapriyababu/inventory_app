@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 class ProductsModel {
   List<Products>? products;

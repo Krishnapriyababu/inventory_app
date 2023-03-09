@@ -5,7 +5,6 @@ import 'package:inventory_app/app/global_controller/firebasecontroller.dart';
 import 'package:inventory_app/app/modules/splash_page/splash_screen.dart';
 import 'package:inventory_app/app/modules/user_registration/registerScreen.dart';
 import 'package:sizer/sizer.dart';
-
 import 'app/modules/user_login/login_page.dart';
 
 main() async {
