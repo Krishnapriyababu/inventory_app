@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:inventory_app/app/modules/bottom_navbar/bottom_nav_page.dart';
 import 'package:inventory_app/core/utils/constants.dart';
-
+import 'package:flutter/foundation.dart';
 import '../../../core/utils/user_type.dart';
 import '../../data/models/user_details_model.dart';
 import '../../global_controller/firebasecontroller.dart';
@@ -19,6 +19,7 @@ class LoginController extends GetxController {
   var userName = "".obs;
   var userloginedType = "".obs;
   RxString selectedUserType = "".obs;
+  var isWeb =kIsWeb;
   final FirebaseController _firebaseController = Get.put(FirebaseController());
 
   @override

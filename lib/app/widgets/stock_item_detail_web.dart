@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:inventory_app/app/modules/StockDetails/stock_controller.dart';
 import 'package:inventory_app/app/widgets/product_data_widget.dart';
+import 'package:inventory_app/app/widgets/product_data_widget_web.dart';
 import 'package:inventory_app/app/widgets/quantity_enter_dialogue.dart';
 import 'package:inventory_app/core/utils/constants.dart';
 import 'package:sizer/sizer.dart';
@@ -24,25 +25,26 @@ class StockItemDetailWeb extends StatelessWidget {
   final StockReportController stockReportController = Get.put(StockReportController());
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     return InkWell(
       onTap: () {},
       child: Container(
-        height: 25.h,
-        width: 95.w,
+        height: 230,
+        width: 400,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: const BorderRadius.all(Radius.circular(15)),
           border: Border.all(color: Colors.blueGrey),
         ),
-        margin: EdgeInsets.only(left: 3.w, top: 1.h),
+        margin: EdgeInsets.only(left: 5, top: 10),
         child: Row(
           children: [
 
             Container(
-              width: 13.h,
-              height: 13.h,
+              width: 50,
+              height: 50,
               margin: EdgeInsets.only(
-                left: 1.w,
+                left: 5,
               ),
               //   margin: const EdgeInsets.only(top: 10,bottom: 700),
               decoration: BoxDecoration(
@@ -52,25 +54,25 @@ class StockItemDetailWeb extends StatelessWidget {
                       fit: BoxFit.cover,
                       image: NetworkImage(productdata.productImage!))),
             ),
-            SizedBox(height: 2.h),
+            SizedBox(height:20),
 
             Container(
-              width: 60.w,
-              height: 15.h,
-              margin: EdgeInsets.only(left: 2.w, top: 1.h),
+              width: 230,
+              height:130,
+              margin: EdgeInsets.only(left: 20, top:20,right: 20),
               child: Column(
                 children: [
-                  ProductDataWidget(
+                  ProductDataWidgetWeb(
                     data: productdata.productName!,
                     title: '',
                   ),
                   SizedBox(
-                    height: 2.w,
+                    height:20,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ProductDataWidget(
+                      ProductDataWidgetWeb(
                         data: productdata.productId!,
                         title: 'Pdt Id : ',
                       ),
@@ -78,7 +80,7 @@ class StockItemDetailWeb extends StatelessWidget {
                       //     data: productdata.categoryId!,
                       //     title: 'Ctg Id : ',
                       //   ),
-                      ProductDataWidget(
+                      ProductDataWidgetWeb(
                         data: (int.parse(productdata.quantity) *
                             int.parse(productdata.productRate))
                             .toString(),
@@ -89,22 +91,20 @@ class StockItemDetailWeb extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ProductDataWidget(
+                      ProductDataWidgetWeb(
                         data: productdata.quantity!,
                         title: 'Quantity : ',
                       ),
-                      ProductDataWidget(
+                      ProductDataWidgetWeb(
                         data: productdata.productRate!,
                         title: ' price : ',
                       ),
                     ],
                   ),
                   SizedBox(
-                    height: 1.h,
+                    height:10,
                   ),
-                  SizedBox(
-                    height: 1.w,
-                  ),
+
                   stockDetailsController.userType.value == "Employee"
                       ? Container()
                       : Row(
@@ -135,8 +135,8 @@ class StockItemDetailWeb extends StatelessWidget {
                             Constants.customToast("tapped remove");
                           },
                           child: Container(
-                            width: 3.h,
-                            height: 3.h,
+                            width: 50,
+                            height: 20,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(color: Colors.black54),

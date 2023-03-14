@@ -113,7 +113,7 @@ class FirebaseController extends GetxController {
       Constants.customToast("inside firecontroller login");
       Get.offAll(() => LoginPage(), transition: Transition.fadeIn);
     } else {
-      Constants.customToast("insideelse else else firecontroller bottom");
+      Constants.customToast("inside else else else firecontroller bottom");
       Get.offAll(() => BottomNavigationPage(), transition: Transition.fadeIn);
     }
   }
