@@ -5,6 +5,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:inventory_app/app/widgets/custom_textfield.dart';
 import 'package:inventory_app/app/widgets/text-field-input.dart';
+import 'package:inventory_app/app/widgets/text_input_dailgoue_web.dart';
+import 'package:inventory_app/app/widgets/textfield_input_web.dart';
 
 import 'package:sizer/sizer.dart';
 import '../../core/utils/Styles.dart';
@@ -20,10 +22,11 @@ class QuantityDetails extends StatelessWidget {
     ProductsController productsController = Get.put(ProductsController());
     return Container(
             child: Column(children: [
+
           Text(
             "Enter Quantity",
             style:
-                heading6.copyWith(color: context.theme.colorScheme.secondary),
+                headingweb6.copyWith(color: context.theme.colorScheme.secondary),
           ),
               TextInputField(
                 controller: productsController.quantity,

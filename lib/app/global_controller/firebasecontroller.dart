@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -13,7 +12,6 @@ import 'package:inventory_app/app/data/models/firebase_stock_model.dart';
 import 'package:inventory_app/app/data/models/product_model.dart';
 import 'package:inventory_app/app/modules/bottom_navbar/bottom_nav_page.dart';
 import 'package:inventory_app/app/modules/user_login/login_page.dart';
-
 import '../../core/utils/constants.dart';
 import '../../core/utils/firebase_constants.dart';
 import '../data/models/user_details_model.dart';
@@ -114,7 +112,8 @@ class FirebaseController extends GetxController {
       Get.offAll(() => LoginPage(), transition: Transition.fadeIn);
     } else {
       Constants.customToast("inside else else else firecontroller bottom");
-      Get.offAll(() => BottomNavigationPage(), transition: Transition.fadeIn);
+      Get.offAll(() => BottomNavigationPage(),
+          transition: Transition.fadeIn);
     }
   }
 
