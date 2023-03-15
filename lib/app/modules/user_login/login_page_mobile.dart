@@ -117,13 +117,13 @@ class LoginMobile extends StatelessWidget {
 
                     CustomButton(
                       onTap: () {
-                        // if (_loginformKey.currentState!.validate()) {
-                        //   if (loginController.userType == UserType.nil) {
-                        //     Constants.customToast('Please select type of user');
-                        //   } else {
+                        if (_loginformKey.currentState!.validate()) {
+                          if (loginController.userType == UserType.nil) {
+                            Constants.customToast('Please select type of user');
+                          } else {
                         loginController.loginUser();
-                        //   }
-                        // }
+                          }
+                        }
                       },
                       button_text: 'SignIn',
                     ),

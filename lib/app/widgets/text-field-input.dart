@@ -45,7 +45,7 @@ class TextInputField extends StatelessWidget {
                 EdgeInsets.symmetric(horizontal: .5.h),
                 child: Icon(
                   icon,
-                  size: 16.sp,
+                  size: 20.sp,
                   color:  Colors.blueGrey,
                 ),
               ),

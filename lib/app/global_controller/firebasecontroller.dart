@@ -10,6 +10,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:inventory_app/app/data/models/firebase_stock_model.dart';
 import 'package:inventory_app/app/data/models/product_model.dart';
+import 'package:inventory_app/app/modules/HamburgerMenu/hamburger_screen.dart';
 import 'package:inventory_app/app/modules/bottom_navbar/bottom_nav_page.dart';
 import 'package:inventory_app/app/modules/user_login/login_page.dart';
 import '../../core/utils/constants.dart';
@@ -24,7 +25,7 @@ class FirebaseController extends GetxController {
   User? user;
   RxBool netWorkStatus = true.obs;
   var deleteStatus = false.obs;
-
+  var isWeb =kIsWeb;
   //this variable 0 = No Internet, 1 = connected to WIFI ,2 = connected to Mobile Data.
   //Instance of Flutter Connectivity
   late UserData userData;
@@ -112,8 +113,11 @@ class FirebaseController extends GetxController {
       Get.offAll(() => LoginPage(), transition: Transition.fadeIn);
     } else {
       Constants.customToast("inside else else else firecontroller bottom");
-      Get.offAll(() => BottomNavigationPage(),
-          transition: Transition.fadeIn);
+      if(isWeb){
+        Get.offAll(() => HamburgerMenu(), transition: Transition.fadeIn);
+      }else {
+        Get.offAll(() => BottomNavigationPage(), transition: Transition.fadeIn);
+      }
     }
   }
 
@@ -138,10 +142,21 @@ class FirebaseController extends GetxController {
             userType: selectedUserType,
             sms: false,
           );
-          reference
-              .doc(value.user?.uid.toString())
-              .set(userData.toMap())
-              .then((value) => Get.offAll(BottomNavigationPage()));
+          if(isWeb){
+            reference
+                .doc(value.user?.uid.toString())
+                .set(userData.toMap())
+                .then((value) => Get.offAll(HamburgerMenu()));
+          }else{
+            reference
+                .doc(value.user?.uid.toString())
+                .set(userData.toMap())
+                .then((value) => Get.offAll(BottomNavigationPage()));
+          }
+          // reference
+          //     .doc(value.user?.uid.toString())
+          //     .set(userData.toMap())
+          //     .then((value) => Get.offAll(BottomNavigationPage()));
         }).catchError((onError) =>
                 log("Inside registermethod on error catch $onError"));
       } catch (firebaseAuthException) {}
@@ -150,11 +165,20 @@ class FirebaseController extends GetxController {
 
   void login(String email, String password) async {
     try {
-      await firebaseAuth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) {})
-          .catchError((onError) =>
-              Get.snackbar("Error while sign in ", onError.message));
+        await firebaseAuth
+            .signInWithEmailAndPassword(email: email, password: password)
+            .then((value) =>() {
+              if(isWeb){
+                Get.offAll(HamburgerMenu());
+              }else{
+                Get.offAll(BottomNavigationPage());
+              }
+
+        })
+            .catchError((onError) =>
+            Get.snackbar("Error while sign in ", onError.message));
+
+
     } catch (firebaseAuthException) {}
   }
 

@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,6 +10,8 @@ import 'package:flutter/foundation.dart';
 import '../../../core/utils/user_type.dart';
 import '../../data/models/user_details_model.dart';
 import '../../global_controller/firebasecontroller.dart';
+import '../HamburgerMenu/hamburger_screen.dart';
+
 
 class LoginController extends GetxController {
   late TextEditingController userEmailController;
@@ -56,7 +57,7 @@ class LoginController extends GetxController {
         Constants.customToast("Please turn on your internet");
       } else {
         _firebaseController.login(
-            "kpkichu333@gmail.com", "Priya@123");
+            userEmailController.text, passwordController.text);
 
 
       }
@@ -114,11 +115,25 @@ class LoginController extends GetxController {
 
   void socialMediaSignIn(UserData smsUserData) async {
     log("mediadata.... ${smsUserData.mailId}");
-    CollectionReference reference =
-    FirebaseFirestore.instance.collection("Users");
-    reference
-        .doc(smsUserData.id)
-        .set(smsUserData.toMap())
-        .then((value) => Get.offAll( BottomNavigationPage()));
+    if(isWeb){
+      CollectionReference reference =
+      FirebaseFirestore.instance.collection("Users");
+      reference
+          .doc(smsUserData.id)
+          .set(smsUserData.toMap())
+          .then((value) =>(){
+        Get.offAll( HamburgerMenu());
+      });
+    }else{
+      CollectionReference reference =
+      FirebaseFirestore.instance.collection("Users");
+      reference
+          .doc(smsUserData.id)
+          .set(smsUserData.toMap())
+          .then((value) =>(){
+        Get.offAll( BottomNavigationPage());
+      });
+    }
+
   }
 }

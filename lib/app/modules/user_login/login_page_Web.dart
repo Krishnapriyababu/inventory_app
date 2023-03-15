@@ -1,6 +1,4 @@
 
-import 'dart:js';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -134,13 +132,13 @@ class LoginWeb extends StatelessWidget {
 
                     CustomButton(
                       onTap: () {
-                        // if (_loginformKey.currentState!.validate()) {
-                        //   if (loginController.userType == UserType.nil) {
-                        //     Constants.customToast('Please select type of user');
-                        //   } else {
+                        if (_loginformKey.currentState!.validate()) {
+                          if (loginController.userType == UserType.nil) {
+                            Constants.customToast('Please select type of user');
+                          } else {
                         loginController.loginUser();
-                        //   }
-                        // }
+                          }
+                        }
                       },
                       button_text: 'SignIn',
                     ),

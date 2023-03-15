@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-TextStyle heading1 =  TextStyle(fontSize: 5.sp, color: Colors.black54);
+TextStyle heading1 =  TextStyle(fontSize: 12.sp, color: Colors.black54);
 TextStyle headingWeb1 =  TextStyle(fontSize: 3.sp, color: Colors.black54);
 TextStyle heading2 =  TextStyle(fontSize: 10.sp, color: Colors.black26,fontWeight: FontWeight.w600);
 TextStyle heading4 =  TextStyle(
