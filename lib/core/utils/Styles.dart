@@ -7,9 +7,9 @@ TextStyle heading1 =  TextStyle(fontSize: 12.sp, color: Colors.black54);
 TextStyle headingWeb1 =  TextStyle(fontSize: 3.sp, color: Colors.black54);
 TextStyle heading2 =  TextStyle(fontSize: 10.sp, color: Colors.black26,fontWeight: FontWeight.w600);
 TextStyle heading4 =  TextStyle(
-    fontSize: 6.sp, color: Colors.black, fontWeight: FontWeight.w600);
+    fontSize: 8.sp, color: Colors.black, fontWeight: FontWeight.w600);
 TextStyle heading5 =
-TextStyle(fontSize: 6.sp, color: Colors.blue, fontWeight: FontWeight.bold);
+TextStyle(fontSize: 15.sp, color: Colors.blue, fontWeight: FontWeight.bold);
 TextStyle headingweb5 =
 TextStyle(fontSize: 6.sp, color: Colors.blue, fontWeight: FontWeight.bold);
 TextStyle heading6 =  TextStyle(

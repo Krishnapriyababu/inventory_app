@@ -115,25 +115,20 @@ class LoginController extends GetxController {
 
   void socialMediaSignIn(UserData smsUserData) async {
     log("mediadata.... ${smsUserData.mailId}");
-    if(isWeb){
       CollectionReference reference =
       FirebaseFirestore.instance.collection("Users");
       reference
           .doc(smsUserData.id)
           .set(smsUserData.toMap())
           .then((value) =>(){
-        Get.offAll( HamburgerMenu());
-      });
-    }else{
-      CollectionReference reference =
-      FirebaseFirestore.instance.collection("Users");
-      reference
-          .doc(smsUserData.id)
-          .set(smsUserData.toMap())
-          .then((value) =>(){
-        Get.offAll( BottomNavigationPage());
+            if(isWeb){
+              Get.offAll( HamburgerMenu());
+            }else{
+              Get.offAll( BottomNavigationPage());
+            }
+
       });
     }
 
   }
-}
+
